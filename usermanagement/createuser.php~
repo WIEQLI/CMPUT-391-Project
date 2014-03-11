@@ -1,0 +1,93 @@
+<?php
+if(isset($_POST['submit'])) {
+
+	$firstname = processText($_POST['firstname']);
+	$lastname = processText($_POST['lastname']);
+	$email = processText($_POST['email']);
+	$address = processText($_POST['address']);
+	$phone = processText($_POST['phone']);
+
+	$areBlank = checkText($firstname,'Please enter your first name');
+	$areBlank2 = checkText($lastname,'Please enter your last name');
+	$areBlank3 = checkText($email,'Please enter your email');
+	$areBlank4 = checkText($address,'Please enter your address');
+	$areBlank5 = checkText($phone,'Please enter your phone');
+	
+	if($areBlank && $areBlank2 && $areBlank3 && $areBlank4 && $areBlank5) {
+		require('/compsci/webdocs/kjross/web_docs/database/dbconnect.php');
+		require('/compsci/webdocs/kjross/web_docs/database/gettableid.php');
+
+		//Establish connection to database
+		$conn = dbConnect();
+		
+		//Gets next person_id in persons table
+		$id = getTableId($conn,'persons');
+
+		//SQL command
+		$sql = 'INSERT INTO persons VALUES (\''.$id.'\',\''.$firstname.'\',\''.$lastname.'\',\''.$address.'\',\''.$email.'\',\''.$phone.'\')';
+
+
+		//Prepares sql using connection and returns statement identifier
+		$stm = oci_parse($conn,$sql);
+
+		//Executes statement returned from oci_parse
+		$rs = oci_execute($stm);
+
+		//If error, retrieve the error using oci_error() function and output an error message
+		if (!$rs) {
+			$err = oci_error($stm);
+			echo htmlentities($err['message']);
+		}
+
+		// Free the statement identifier when closing the connection
+		oci_free_statement($stm);
+
+		//Closes connection
+		oci_close($conn);		
+	}
+}
+
+//Gets rid of any unneeded characters for security purposes and return whether is blank or not
+function processText($text) {
+	$text = trim($text);
+	$text = stripslashes($text);
+	$text = htmlspecialchars($text);
+	$text = strtolower($text);
+	return $text;
+}
+
+//Checks text if empty and alerts user and returns false if empty
+function checkText($text,$message){
+	if(empty($text)) {
+		echo $message;
+		return false;
+	}
+	else {
+		return true;
+	}
+	
+}
+
+function checkEmailUnique($conn,$email) {
+	//Prepares sql using connection and returns statement identifier	
+	$stid = oci_parse($conn,'SELECT COUNT(*) from persons p where p.email = '.$email);
+
+	//Executes statement returned from oci_parse
+	$res = oci_execute($stid);
+
+	//If error, retrieve the error using oci_error() function and output an error message
+	if (!$res) {
+		$err = oci_error($stid);
+		echo htmlentities($err['message']);
+	}
+
+	//Fetches results of oci_parse and outputs it as array
+	$num = oci_fetch_array($stid,OCI_NUM);
+
+	// Frees the statement identifier
+	oci_free_statement($stid);
+}
+
+
+
+?>
