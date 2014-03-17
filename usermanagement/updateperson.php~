@@ -1,15 +1,17 @@
 <?php
+
 //Create errorcode array that hold status of errors and messages
 $errorcode = array(true,'');
 
 //Processes fields text
-$firstname = processField($_POST['firstname']);
-$lastname = processField($_POST['lastname']);
-$email = processField($_POST['email']);
-$address = processField($_POST['address']);
-$phone = processField($_POST['phone']);
+$firstname = processField($_POST['firstname2']);
+$lastname = processField($_POST['lastname2']);
+$email = processField($_POST['email3']);
+$address = processField($_POST['address2']);
+$phone = processField($_POST['phone2']);
+$person_id = $_POST['person_id'];
 
-//Check that fields arent empty
+//Checks that fields arent empty
 $errorcode = checkFieldEmpty($firstname,'Please enter your first name <br/>',$errorcode);
 $errorcode = checkFieldEmpty($lastname,'Please enter your last name <br/>',$errorcode);
 $errorcode = checkFieldEmpty($email,'Please enter your email <br/>',$errorcode);
@@ -33,26 +35,23 @@ if($errorcode[0]) {
 	$conn = dbConnect();
 
 	//Checks if email is unique
-	$errorcode = checkEmailUnique($conn,$email,$errorcode);
+	//$errorcode = checkEmailUnique($conn,strtolower($email),$errorcode);
 
 	//If is unique
 	if($errorcode[0]) {
-	
-		//Gets next person_id in persons table
-		$id = getTableId($conn,'persons');
 
 		//SQL command for entering values into persons
-		$sql = 'INSERT INTO persons VALUES (\''.$id.'\',\''.$firstname.'\',\''.$lastname.'\',\''.$address.'\',\''.$email.'\',\''.$phone.'\')';
+		$sql = 'UPDATE persons SET first_name = \''.$firstname.'\', last_name = \''.$lastname.'\', address= \''.$address.'\', email =\''.strtolower($email).'\', phone = \''.$phone.'\' WHERE person_id = \''.$person_id.'\''; 
 
 		//Executes sql command
 		 $num = executeCommand($conn,$sql);
 
 		//Closes connection
 		oci_close($conn);
-
+		
 		if($num[1]) {
 			//Returns status of .php code and messages
-			echo json_encode(array('status'=>'true','message'=>'User created: '.$email.'<br/>'));
+			echo json_encode(array('status'=>'true','message'=>'Person sucessfully updated'));
 		}
 		else {
 			//Returns status of .php code and messages
@@ -103,7 +102,7 @@ function checkEmailUnique($conn,$email,$errorcode) {
 	$num = executeCommand($conn,'SELECT COUNT(*) from persons p where p.email =\''.$email.'\'');
 
 	//If oci_parse finds email in use return false and alert user
-	if($num[0][0] >= 1) {
+	if($num[0][0] >= 2) {
 		$errorcode[1] = 'Email is already in use please enter a valid email';
 		$errorcode[0] = false;	
 	}

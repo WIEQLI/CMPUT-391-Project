@@ -1,0 +1,79 @@
+<?php
+//Create errorcode array that hold status of errors and messages
+$errorcode = array(true,'');
+
+//Processes fields text
+$username = strtolower(processField($_POST['username']));
+
+//Check that fields arent empty
+$errorcode = checkFieldEmpty($username,'Please enter an username <br/>',$errorcode);
+
+//Checks that fields are appropriate size
+$errorcode = checkFieldLength(24,$username,"Please enter an username with less then 28 characters <br/>",$errorcode);
+
+if($errorcode[0] == 'true') {
+	require('/compsci/webdocs/kjross/web_docs/database/dbconnect.php');
+	require('/compsci/webdocs/kjross/web_docs/database/gettableid.php');
+	require('/compsci/webdocs/kjross/web_docs/database/executecommand.php');
+	
+	//Establish connection to database
+	$conn = dbConnect();
+	
+	$row = findUsername($conn,$username,$errorcode);
+
+	//Closes connection
+	oci_close($conn);
+	
+	if($row[0][0] == 'true') {
+		echo json_encode(array('status'=>$row[0][0],'message'=>'User Found','username'=>$row[1][0][0],'password'=>$row[1][0][1],'class'=>$row[1][0][2],'personid'=>$row[1][0][3],'dateregistered'=>$row[1][0][4]));
+	}
+	else {
+		echo json_encode(array('status'=>$row[0][0],'message'=>$row[0][1]));
+	}
+}
+else {
+	//Returns status of .php code and messages
+	echo json_encode(array('status'=>$errorcode[0],'message'=>$errorcode[1]));
+}
+
+//Checks text if empty and alerts user and returns false if empty
+function checkFieldEmpty($text,$message,$errorcode){
+	if(empty($text)) {
+		$errorcode[1] = $errorcode[1].$message;
+		$errorcode[0] = false;
+	}
+	return $errorcode;
+}
+
+//Checks if field is appropraite size
+function checkFieldLength($maxlength,$text,$message,$errorcode) {
+	if(strlen($text) > $maxlength) {
+		$errorcode[1] = $errorcode[1].$message;
+		$errorcode[0] = false;
+	}
+	return $errorcode;
+}
+
+//Gets rid of any unneeded characters for security purposes and return whether is blank or not
+function processField($text) {
+	$text = trim($text);
+	$text = stripslashes($text);
+	$text = htmlspecialchars($text);
+	$text = strtolower($text);
+	return $text;
+}
+
+function findUsername($conn,$username,$errorcode) {
+
+	//Executes sql command
+	$num = executeCommand($conn,'SELECT u.user_name, u.password, u.class, u.person_id, u.date_registered FROM users u WHERE u.user_name =\''.$username.'\'');
+	
+	//If oci_parse finds email in use return false and alert user
+	if($num[0][0] != $username) {
+		$errorcode[1] = 'Username for user doesnt exist';
+		$errorcode[0] = false;	
+	}
+	return array($errorcode,$num);
+}
+
+?>

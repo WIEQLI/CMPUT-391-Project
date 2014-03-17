@@ -15,7 +15,7 @@ DROP SEQUENCE seq_persons_id;
  *  To store the personal information
  */
 CREATE TABLE persons (
-   person_id number,
+   person_id int,
    first_name varchar(24),
    last_name  varchar(24),
    address    varchar(128),
@@ -34,7 +34,7 @@ CREATE SEQUENCE seq_persons_id START WITH 1 INCREMENT BY 1;
  */
 CREATE TABLE users (
    user_name varchar(24),
-   password  varchar(24),
+   password  varchar(32),
    class     char(1),
    person_id int,
    date_registered date,

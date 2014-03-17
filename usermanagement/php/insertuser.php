@@ -64,6 +64,9 @@ if($errorcode[0]) {
 		}
 	}	
 	else {
+		//Closes connection
+		oci_close($conn);
+
 		//Returns status of .php code and messages
 		echo json_encode(array('status'=>$errorcode[0],'message'=>$errorcode[1]));
 	}	

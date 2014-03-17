@@ -1,0 +1,54 @@
+<html>
+	<head>
+	<link rel="stylesheet" type="text/css" href="stylesheets/generalstylesheet.css">
+	<script type="text/javascript" src="jquery1.1.min.js"></script>
+		<title>Update Person</title>
+	</head>
+	<body> 
+		<div id="page-wrap">
+			<div id="header">
+				<div id="titlebar">
+					<h1>Radiology Information System</h1>
+				</div>
+			</div>
+				<div id="content-wrap" class="styleform">
+					<h2>Update Person</h2>
+					<h3>*required field</h3>
+					<div id="alertbox">
+					</div>
+					<form name="form1" action='usermanagement/updateperson.php' method="post" class='ajaxform'>
+						<label for="email">*Email:</label><input id="email" name="email" type="text"></br>
+						<input type="submit" name="submit" value="Find User">
+					</form>
+					<ul id="personlist" data-role="listview">
+					</ul>
+				</div>
+			
+			<div id="footer">
+			</div>
+		</div>
+			
+	</body>
+	<script>
+jQuery(document).ready(function(){
+	jQuery('.ajaxform').submit( function() {
+		$.ajax({
+			url     : $(this).attr('action'),
+			type    : $(this).attr('method'),
+			data    : $(this).serialize(),
+			success : function( data ) {
+				//Parses JSON data 
+				var data = $.parseJSON(data);  
+				
+			},
+			error   : function(){
+				alert('Something wrong');
+			}
+		});
+		return false;
+	});
+});
+	
+	</script>
+
+</html>

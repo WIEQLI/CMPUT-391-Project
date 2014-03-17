@@ -38,7 +38,7 @@ body {
 	font-family:" Tahoma", cursivse, sans-serif;
 	margin-left:40px;
 	margin-top:25px;
-
+	text-shadow: 1px 0 0 black, -1px 0 0 black, 0 1px 0 black, 0 -1px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
 }
 
 #content-wrap {
@@ -79,7 +79,7 @@ body {
 	height: 70px; 
 }
 
-#content-wrap {
+.styleform {
 	background: -webkit-gradient(linear, bottom, left 175px, from(#CCCCCC), to(#EEEEEE));
 	background: -moz-linear-gradient(bottom, #CCCCCC, #EEEEEE 175px);
 	margin:auto;
