@@ -11,7 +11,7 @@ $errorcode = array(true,'');
 
 //Processes fields text
 $email = processField($_POST['email']);
-$username = strtolower(processField($_POST['username']));
+$username = processField($_POST['username']);
 $password = processField($_POST['password']);
 $password2 = processField($_POST['password2']);
 

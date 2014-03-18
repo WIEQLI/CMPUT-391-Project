@@ -19,13 +19,15 @@
 					<form name="form1" action='usermanagement/php/insertuser.php' method="post" class='ajaxform'>
 						<label for="email">*Email from person:</label><input id="email" name="email" type="text"></br>
 						<label for="username">*Username:</label><input id="username" name="username" type="text"></br>
-						<label for="password">*Password:</label><input id="password" name="password" type="text"></br>
-						<label for="classes">Classes:</label></br><select name="classes" id="classes">
-        						<option value="a">Administrator</option>
-        						<option value="p">Patient</option>
-        						<option value="d">Doctor</option>
-        						<option value="r">Radiologist</option>
-    				</select></br></br>
+						<label for="password">*Password:</label><input id="password" name="password" type="password"></br>
+						<label for="password2">*Confirm Password:</label><input id="password2" name="password2" type="password"></br>
+						<label for="classes">Classes:</label></br>
+								<select name="classes" id="classes">
+	        						<option value="a">Administrator</option>
+    	    						<option value="p">Patient</option>
+    	    						<option value="d">Doctor</option>
+    	    						<option value="r">Radiologist</option>
+    						</select></br></br>
 						<input type="submit" name="submit" value="Create user">
 					</form>
 				</div>
@@ -57,6 +59,7 @@ jQuery(document).ready(function(){
 					$('#email').val('');
 					$('#username').val('');
 					$('#password').val('');
+					$('#password2').val('');
 				}
 				else {
 					//Change color of text in alert box
@@ -74,6 +77,8 @@ jQuery(document).ready(function(){
 					if(data['message'].toLowerCase().indexOf('password') >= 0) {
 						$('#password').css('border','1px solid red');
 						$('#password').val('');
+						$('#password2').css('border','1px solid red');
+						$('#password2').val('');
 					}
 				}
 				//Display message into alert box
