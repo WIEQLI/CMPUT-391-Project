@@ -10,16 +10,17 @@ function executeCommand($conn,$sql) {
 	if (!$res) {
 		$err = oci_error($stid);
 		echo htmlentities($err['message']);
-		return arrry(null,false);
+		return array(null,false);
 	}
+	else{
+		//Fetches results of oci_parse and outputs it as array
+		$num = oci_fetch_array($stid,OCI_NUM);
 
-	//Fetches results of oci_parse and outputs it as array
-	$num = oci_fetch_array($stid,OCI_NUM);
+		// Frees the statement identifier
+		oci_free_statement($stid);
 
-	// Frees the statement identifier
-	oci_free_statement($stid);
-
-	return array($num,true);
+		return array($num,true);
+	}
 }
 
 ?>

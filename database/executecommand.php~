@@ -10,7 +10,7 @@ function executeCommand($conn,$sql) {
 	if (!$res) {
 		$err = oci_error($stid);
 		echo htmlentities($err['message']);
-		return arrary(null,false);
+		return array(null,false);
 	}
 
 	//Fetches results of oci_parse and outputs it as array
