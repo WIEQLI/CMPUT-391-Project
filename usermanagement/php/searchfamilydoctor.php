@@ -33,7 +33,7 @@ if($errorcode[0] == 'true') {
 	oci_close($conn);
 	
 	if($row[0][0] == 'true') {
-		echo json_encode(array('status'=>$row[0][0],'message'=>'User Found','d_email'=>$row[1][0][0],'p_email'=>$row[1][0][1]));
+		echo json_encode(array('status'=>$row[0][0],'message'=>'Family doctor found Doctor: '.$p_email.' Patient: '.$d_email,'d_email'=>$row[1][0][0],'p_email'=>$row[2][0][0]));
 	}
 	else {
 		echo json_encode(array('status'=>$row[0][0],'message'=>$row[0][1]));

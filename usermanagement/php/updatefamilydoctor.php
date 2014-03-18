@@ -8,8 +8,11 @@ require('/compsci/webdocs/kjross/web_docs/usermanagement/php/checkfieldempty.php
 $errorcode = array(true,'');
 
 //Processes fields text
-$d_email = strtolower(processField($_POST['email']));
-$p_email = strtolower(processField($_POST['email2']));
+$d_email = strtolower(processField($_POST['email3']));
+$p_email = strtolower(processField($_POST['email4']));
+
+$curr_demail = $_POST['doctor_id'];
+$curr_pemail = $_POST['patient_id'];
 
 //Checks that fields arent empty
 $errorcode = checkFieldEmpty($d_email,'Please enter your doctors email <br/>',$errorcode);
@@ -29,13 +32,28 @@ if($errorcode[0] == 'true') {
 	
 	$row = checkFamilyDoctorExist($conn,$p_email,$d_email,$errorcode);
 
-	//Closes connection
-	oci_close($conn);
-	
 	if($row[0][0] == 'true') {
-		echo json_encode(array('status'=>$row[0][0],'message'=>'Family doctor found Doctor: '.$p_email.' Patient: '.$d_email,'d_email'=>$row[1][0][0],'p_email'=>$row[1][0][1]));
+		//SQL command for entering values into family_doctor
+		$sql = 'UPDATE family_doctor SET doctor_id = \''.$row[1][0][0].'\', patient_id= \''.$row[2][0][0].'\' WHERE doctor_id = \''.$curr_demail.'\' AND patient_id = \''.$curr_pemail.'\''; 
+
+		//Executes sql command
+		$num = executeCommand($conn,$sql);
+
+		//Closes connection
+		oci_close($conn);
+
+		if($num[1]) {
+			echo json_encode(array('status'=>$row[0][0],'message'=>'Family doctor updated Doctor: '.$p_email.' Patient: '.$d_email,'d_email'=>$row[1][0][0],'p_email'=>$row[1][0][1],'d'=>$curr_demail));
+		}
+		else {
+			//Returns status of .php code and messages
+			echo json_encode(array('status'=>false,'message'=>'Error executing command to database'));
+		}
 	}
 	else {
+		//Closes connection
+		oci_close($conn);
+
 		echo json_encode(array('status'=>$row[0][0],'message'=>$row[0][1]));
 	}
 }
@@ -68,7 +86,7 @@ function checkFamilyDoctorExist($conn,$p_email,$d_email,$errorcode) {
 	$num = executeCommand($conn,'SELECT COUNT(*) FROM family_doctor f WHERE f.doctor_id =\''.$p1[0][0].'\' AND f.patient_id =\''.$p2[0][0].'\'');
 
 	//If oci_parse doesnt find email within persons
-	if($num[0][0] == 0) {
+	if($num[0][0] != 0) {
 		$errorcode[1] = 'Family doctor entry with patients and doctors specified already exists';
 		$errorcode[0] = false;	
 	}

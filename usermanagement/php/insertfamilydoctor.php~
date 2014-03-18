@@ -9,8 +9,8 @@ require('/compsci/webdocs/kjross/web_docs/usermanagement/php/checkfieldempty.php
 $errorcode = array(true,'');
 
 //Processes fields text
-$d_email = processField($_POST['email']);
-$p_email = processField($_POST['email2']);
+$d_email = strtolower(processField($_POST['email']));
+$p_email = strtolower(processField($_POST['email2']));
 
 
 //Checks that fields arent empty
