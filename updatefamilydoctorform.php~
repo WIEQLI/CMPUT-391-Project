@@ -1,3 +1,11 @@
+<?php session_start();
+	//Checks login has been done and is an administrator
+	if(isset($_SESSION['user_name'])){
+		require('/compsci/webdocs/kjross/web_docs/login/getuserdata.php');
+		//Obtaining user data
+		$res = getUserData($_SESSION['user_name']);
+		if($res[0][2] == 'a'){
+?>
 <html>
 	<head>
 	<link rel="stylesheet" type="text/css" href="stylesheets/generalstylesheet.css">
@@ -16,8 +24,7 @@
 					<h3>*required field</h3>
 					<div id="alertbox">
 					</div>
-					<input id="doctor_id" name="doctor_id" visibility="hidden" type="text">
-					<input id="patient_id" name="patient_id" visibility="hidden" type="text">
+					
 					<form id='form1' name="form1" action='usermanagement/php/searchfamilydoctor.php' method="post" class='ajaxform'>
 						<h4><u>Search for family doctor</u></h4>
 						<label for="email">*Email from doctor:</label><input id="email" name="email" type="text"></br>
@@ -25,6 +32,8 @@
 						<input type="submit" name="submit" value="Search family doctor">
 					</form></br>
 					<form id='form2' name="form2" action='usermanagement/php/updatefamilydoctor.php' method="post" class='ajaxform2'>
+						<input id="doctor_id" name="doctor_id" visibility="hidden" type="text">
+						<input id="patient_id" name="patient_id" visibility="hidden" type="text">
 						<h4><u>Enter emails for doctor and patient to update</u></h4>
 						<label for="email3">*Email from doctor:</label><input id="email3" name="email3" type="text"></br>
 						<label for="email4">*Email from patient:</label><input id="email4" name="email4" type="text"></br>
@@ -157,3 +166,9 @@ jQuery(document).ready(function(){
 	</script>
 
 </html>
+<?php }else{ echo header('Location:loginform.php');}}
+	//Redirect to login if fails
+	else {
+		header('Location:loginform.php');
+	}
+?>

@@ -1,3 +1,11 @@
+<?php session_start();
+	//Checks login has been done and is an administrator
+	if(isset($_SESSION['user_name'])){
+		require('/compsci/webdocs/kjross/web_docs/login/getuserdata.php');
+		//Obtaining user data
+		$res = getUserData($_SESSION['user_name']);
+		if($res[0][2] == 'a'){
+?>
 <html>
 	<head>
 	<link rel="stylesheet" type="text/css" href="stylesheets/generalstylesheet.css">
@@ -155,3 +163,9 @@ jQuery(document).ready(function(){
 	</script>
 
 </html>
+<?php }else{ echo header('Location:loginform.php');}}
+	//Redirect to login if fails
+	else {
+		header('Location:loginform.php');
+	}
+?>

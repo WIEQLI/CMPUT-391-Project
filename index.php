@@ -12,7 +12,6 @@
 				</div>
 			</div>
 				<div id="content-wrap">
-					<h2><a href="usermanagement.php">User Management System</a></h2>
 					<h2><a href="loginform.php">User Login</a></h2>
 				</div>
 			<div id="footer">

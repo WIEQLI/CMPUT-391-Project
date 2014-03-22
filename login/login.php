@@ -1,6 +1,4 @@
 <?php
-
-
 //Inserts general functions
 require('/compsci/webdocs/kjross/web_docs/usermanagement/php/processfield.php');
 require('/compsci/webdocs/kjross/web_docs/usermanagement/php/checkfieldlength.php');
@@ -34,18 +32,19 @@ if($errorcode[0]) {
 	$conn = dbConnect();
 
 	//Executes sql command
-	$num = executeCommand($conn,'SELECT user_name, class FROM users WHERE user_name =\''.$username.'\' AND password =\''.$password.'\'');
+	$num = executeCommand($conn,'SELECT u.user_name,u.class FROM users u WHERE u.user_name =\''.$username.'\' AND u.password =\''.$password.'\'');
 
 	//Closes connection
 	oci_close($conn);
 
+	
 	//If doesnt find the right count
-	if($num[0][0]) {
-		echo json_encode(array('status'=>true,'message'=>'Found User','username'=>$num[0][0]));	
+	if($num[0]) {
+		echo json_encode(array('status'=>true,'message'=>'Found User','username'=>$num[0][0],'class'=>$num[0][1]));	
 		$_SESSION['user_name'] = $username;
 	}
 	else {
-		echo json_encode(array('status'=>false,'message'=>'Invalid username/password please re-enter and try again',));
+		echo json_encode(array('status'=>false,'message'=>'Invalid username/password please re-enter and try again'));
 		
 	}
 }

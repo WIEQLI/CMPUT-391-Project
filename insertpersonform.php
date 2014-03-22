@@ -1,7 +1,15 @@
+<?php session_start();
+	//Checks login has been done and is an administrator
+	if(isset($_SESSION['user_name'])){
+		require('/compsci/webdocs/kjross/web_docs/login/getuserdata.php');
+		//Obtaining user data
+		$res = getUserData($_SESSION['user_name']);
+		if($res[0][2] == 'a'){
+?>
 <html>
 	<head>
-	<link rel="stylesheet" type="text/css" href="stylesheets/generalstylesheet.css">
-	<script type="text/javascript" src="jquery1.1.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="stylesheets/generalstylesheet.css">
+		<script type="text/javascript" src="jquery1.1.min.js"></script>
 		<title>Insert Person</title>
 	</head>
 	<body> 
@@ -94,7 +102,11 @@ jQuery(document).ready(function(){
 		return false;
 	});
 });
-	
-	</script>
-
+</script>
 </html>
+<?php }else{ echo header('Location:loginform.php');}}
+	//Redirect to login if fails
+	else {
+		header('Location:loginform.php');
+	}
+?>

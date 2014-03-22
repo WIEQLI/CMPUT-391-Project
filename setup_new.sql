@@ -25,7 +25,7 @@ CREATE TABLE persons (
    UNIQUE (email)
 );
 
-CREATE SEQUENCE seq_persons_id START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE seq_persons_id START WITH 2 INCREMENT BY 1;
 
 /*
  *  To store the log-in information
@@ -85,3 +85,7 @@ CREATE TABLE pacs_images (
    PRIMARY KEY(record_id,image_id),
    FOREIGN KEY(record_id) REFERENCES radiology_record
 );
+
+INSERT INTO persons VALUES(1,'admin','admin','admin','admin','admin');
+INSERT INTO users VALUES('admin','admin','a',1,sysdate);
+commit;

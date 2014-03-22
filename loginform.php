@@ -11,26 +11,40 @@
 					<h1>Radiology Information System</h1>
 				</div>
 			</div>
-				<div id="content-wrap" class="styleform">
+				<div id="content-wrap" >
+					<div id='profile'>
 					<?php session_start(); ?>
-						<div id='profile'>
   						<?php if(isset($_SESSION['user_name'])){
+							echo "<a href='login/logout.php' id='logout'>Logout</a></br></br>";
+							require('/compsci/webdocs/kjross/web_docs/login/getuserdata.php');
+							$res = getUserData($_SESSION['user_name']);
+							echo '<h1><u>Welcome '.$res[0][0].'</u></h1></br>';
+							echo "<a href='login/updateuseremailform.php'>Modify Account</a>&nbsp;&nbsp;&nbsp;&nbsp";
+							echo "<a href='login/updateuserpasswordform.php'>Change Password</a>";
+							if($res[0][2] == 'a'){
+								echo '<h2></br><a href="insertpersonform.php">Insert Person</a></h2>
+								<h2><a href="updatepersonform.php">Update Person</a></h2>
+								<h2><a href="insertuserform.php">Insert User</a></h2>
+								<h2><a href="updateuserform.php">Update User</a></h2>
+								<h2><a href="insertfamilydoctorform.php">Insert Family Doctor</a></h2>
+								<h2><a href="updatefamilydoctorform.php">Update Family Doctor</a></h2>';
+							}
   					?>
-  					 	<a href='login/logout.php' id='logout'>Logout</a>
   					<?php }else {?>
   						<!-- Login Form -->
-						<div id='loginform'>
+						<div class="styleform" id='loginform'>
 							<h2>Login</h2>
 							<div id="alertbox">
 							</div>
 							<form name="form1" action='login/login.php' method="post" class='ajaxform'>
 								<label for="username">Username:</label><input id="username" name="username" type="text"></br>
-								<label for="password">Password:</label><input id="passowrd" name="password" type="password"></br>
+								<label for="password">Password:</label><input id="password" name="password" type="password"></br>
 								<input type="submit" name="submit" value="Login">
+
 							</form>
 						</div>
-						</div>
   					<?php } ?>
+					</div>
 				</div>
 			<div id="footer">
 			</div>
@@ -59,8 +73,20 @@ jQuery(document).ready(function(){
 					$("#login_form").fadeOut("normal");
 					
 					//Adds code to profile
-					$("#profile").html("<a href='login/logout.php' id='logout'>Logout</a>");
-					$("#profile").append('<h3>Welcome '+data['username']+'!!!</h3>');
+					$("#profile").html("<a href='login/logout.php' id='logout'>Logout</a></br></br>");
+					$("#profile").append('<h1><u>Welcome '+data['username']+'</u></h1></br>');
+					$("#profile").append('<a href="login/updateuseremailform.php">Modify Account</a>&nbsp;&nbsp;&nbsp;&nbsp');
+					$("#profile").append('<a href="login/updateuserpasswordform.php">Change Password</a>');
+					if(data['class'] == 'a'){
+						$("#profile").append('<h2></br><a href="insertpersonform.php">Insert Person</a></h2>'
+						+'<h2><a href="updatepersonform.php">Update Person</a></h2>'
+						+'<h2><a href="insertuserform.php">Insert User</a></h2>'
+						+'<h2><a href="updateuserform.php">Update User</a></h2>'
+						+'<h2><a href="insertfamilydoctorform.php">Insert Family Doctor</a></h2>'
+						+'<h2><a href="updatefamilydoctorform.php">Update Family Doctor</a></h2>');
+					}
+						
+					
 					
 				}
 				else {

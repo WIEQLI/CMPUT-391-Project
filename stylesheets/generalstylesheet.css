@@ -52,6 +52,24 @@ body {
 	padding:20px;
 	
 }
+a {
+	display: inline-block;
+	border:1px solid black;
+	padding: 10px;
+	margin: 10px;
+	background: grey;
+	/* Font styles */
+	color: white;
+	font-weight: bold;
+	text-decoration: none;
+	border-radius:10px;
+	
+	
+}
+
+a:hover {
+    background: #D1D1D1;
+}
 
 #content-wrap h3{
 	color:red;
