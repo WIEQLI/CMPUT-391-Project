@@ -15,6 +15,7 @@
 					<h1>Radiology Information System</h1>
 				</div>
 			</div>
+				<a href="../loginform.php">Back</a>
 				<div id="content-wrap" class="styleform">
 					<h2>Update Email</h2>
 					<h3>*required field</h3>

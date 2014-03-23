@@ -8,7 +8,7 @@ function getUserData($username){
 	$conn = dbConnect();
 
 	//Executes sql command
-	$num = executeCommand($conn,'SELECT user_name, password, class, date_registered FROM users WHERE user_name =\''.$username.'\'');
+	$num = executeCommand($conn,'SELECT user_name, password, class, date_registered, person_id FROM users WHERE user_name =\''.$username.'\'');
 
 	return $num;
 }

@@ -9,7 +9,7 @@ function getUserData($username){
 
 	//Executes sql command
 	$num = executeCommand($conn,'SELECT user_name, password, class, date_registered FROM users WHERE user_name =\''.$username.'\'');
-	echo $num[0][0];
+
 	return $num;
 }
 ?>

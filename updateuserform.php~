@@ -8,7 +8,7 @@
 ?>
 <html>
 	<head>
-	<link rel="stylesheet" type="text/css" href="/stylesheets/generalstylesheet.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/generalstylesheet.css">
 	<script type="text/javascript" src="jquery1.1.min.js"></script>
 		<title>Update User</title>
 	</head>
@@ -19,6 +19,7 @@
 					<h1>Radiology Information System</h1>
 				</div>
 			</div>
+			<a href="../../loginform.php">Back</a>
 			<div id="content-wrap" class="styleform">
 				<h2>Update User</h2>
 				<form id='form1' name="form1" action='usermanagement/php/searchuser.php' method="post" class='ajaxform'>

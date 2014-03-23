@@ -13,21 +13,24 @@
 			</div>
 				<div id="content-wrap" >
 					<div id='profile'>
-					<?php session_start(); ?>
+					<?php session_start();?>
   						<?php if(isset($_SESSION['user_name'])){
-							echo "<a href='login/logout.php' id='logout'>Logout</a></br></br>";
+							echo "<a class='button' href='login/logout.php' id='logout'>Logout</a></br></br>";
 							require('/compsci/webdocs/kjross/web_docs/login/getuserdata.php');
 							$res = getUserData($_SESSION['user_name']);
 							echo '<h1><u>Welcome '.$res[0][0].'</u></h1></br>';
-							echo "<a href='login/updateuseremailform.php'>Modify Account</a>&nbsp;&nbsp;&nbsp;&nbsp";
-							echo "<a href='login/updateuserpasswordform.php'>Change Password</a>";
+							echo "<a class='button' href='login/updateuseremailform.php'>Modify Account</a>&nbsp;&nbsp;&nbsp;&nbsp";
+							echo "<a class='button' href='login/updateuserpasswordform.php'>Change Password</a>";
 							if($res[0][2] == 'a'){
-								echo '<h2></br><a href="insertpersonform.php">Insert Person</a></h2>
-								<h2><a href="updatepersonform.php">Update Person</a></h2>
-								<h2><a href="insertuserform.php">Insert User</a></h2>
-								<h2><a href="updateuserform.php">Update User</a></h2>
-								<h2><a href="insertfamilydoctorform.php">Insert Family Doctor</a></h2>
-								<h2><a href="updatefamilydoctorform.php">Update Family Doctor</a></h2>';
+								echo '<h2></br><a class="button" href="insertpersonform.php">Insert Person</a></h2>
+								<h2><a class="button" href="updatepersonform.php">Update Person</a></h2>
+								<h2><a class="button" href="insertuserform.php">Insert User</a></h2>
+								<h2><a class="button" href="updateuserform.php">Update User</a></h2>
+								<h2><a class="button" href="insertfamilydoctorform.php">Insert Family Doctor</a></h2>
+								<h2><a class="button" href="updatefamilydoctorform.php">Update Family Doctor</a></h2>';
+							}
+							if($res[0][2] == 'r'){
+								echo '<h2></br><a class="button" href="uploading/insertradiologyrecordform.php">Insert Radiology Record</a></h2>';
 							}
   					?>
   					<?php }else {?>
@@ -73,17 +76,20 @@ jQuery(document).ready(function(){
 					$("#login_form").fadeOut("normal");
 					
 					//Adds code to profile
-					$("#profile").html("<a href='login/logout.php' id='logout'>Logout</a></br></br>");
+					$("#profile").html("<a class='button' href='login/logout.php' id='logout'>Logout</a></br></br>");
 					$("#profile").append('<h1><u>Welcome '+data['username']+'</u></h1></br>');
-					$("#profile").append('<a href="login/updateuseremailform.php">Modify Account</a>&nbsp;&nbsp;&nbsp;&nbsp');
-					$("#profile").append('<a href="login/updateuserpasswordform.php">Change Password</a>');
+					$("#profile").append('<a class="button" href="login/updateuseremailform.php">Modify Account</a>&nbsp;&nbsp;&nbsp;&nbsp');
+					$("#profile").append('<a class="button" href="login/updateuserpasswordform.php">Change Password</a>');
 					if(data['class'] == 'a'){
-						$("#profile").append('<h2></br><a href="insertpersonform.php">Insert Person</a></h2>'
-						+'<h2><a href="updatepersonform.php">Update Person</a></h2>'
-						+'<h2><a href="insertuserform.php">Insert User</a></h2>'
-						+'<h2><a href="updateuserform.php">Update User</a></h2>'
-						+'<h2><a href="insertfamilydoctorform.php">Insert Family Doctor</a></h2>'
-						+'<h2><a href="updatefamilydoctorform.php">Update Family Doctor</a></h2>');
+						$("#profile").append('<h2></br><a class="button" href="insertpersonform.php">Insert Person</a></h2>'
+						+'<h2><a class="button" href="updatepersonform.php">Update Person</a></h2>'
+						+'<h2><a class="button" href="insertuserform.php">Insert User</a></h2>'
+						+'<h2><a class="button" href="updateuserform.php">Update User</a></h2>'
+						+'<h2><a class="button" href="insertfamilydoctorform.php">Insert Family Doctor</a></h2>'
+						+'<h2><a class="button" href="updatefamilydoctorform.php">Update Family Doctor</a></h2>');
+					}
+					if(data['class'] == 'r'){
+						$("#profile").append('<h2></br><a class="button" href="uploading/insertradiologyrecordform.php">Insert Radiology Record</a></h2>');
 					}
 						
 					

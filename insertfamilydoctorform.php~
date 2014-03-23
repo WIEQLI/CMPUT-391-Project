@@ -1,5 +1,5 @@
-<-- Checks login has been done and is an administrator -->
 <?php session_start();
+	//Checks login has been done and is an administrator
 	if(isset($_SESSION['user_name'])){
 		require('/compsci/webdocs/kjross/web_docs/login/getuserdata.php');
 		//Obtaining user data
@@ -19,6 +19,7 @@
 					<h1>Radiology Information System</h1>
 				</div>
 			</div>
+				<a href="/compsci/webdocs/kjross/web_docs/loginform.php">Back</a>
 				<div id="content-wrap" class="styleform">
 					<h2>Insert Family Doctor</h2>
 					<h3>*required field</h3>
@@ -90,8 +91,8 @@ jQuery(document).ready(function(){
 	</script>
 
 </html>
-<-- Redirect to login if fails -->
 <?php }else{ echo header('Location:loginform.php');}}
+	//Redirect to login if fails
 	else {
 		header('Location:loginform.php');
 	}

@@ -10,6 +10,7 @@ DROP TABLE radiology_record;
 DROP TABLE users;
 DROP TABLE persons;
 DROP SEQUENCE seq_persons_id;
+DROP SEQUENCE seq_radiologyrecord_id;
 
 /*
  *  To store the personal information
@@ -26,6 +27,7 @@ CREATE TABLE persons (
 );
 
 CREATE SEQUENCE seq_persons_id START WITH 2 INCREMENT BY 1;
+CREATE SEQUENCE seq_radiologyrecord_id START WITH 1 INCREMENT BY 1;
 
 /*
  *  To store the log-in information

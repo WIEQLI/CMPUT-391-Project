@@ -9,7 +9,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="stylesheets/generalstylesheet.css">
-		<script type="text/javascript" src="/compsci/webdocs/kjross/web_docs/jquery1.1.min.js"></script>
+		<script type="text/javascript" src="jquery1.1.min.js"></script>
 		<title>Insert Person</title>
 	</head>
 	<body> 
