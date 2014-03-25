@@ -9,6 +9,7 @@
 			<div id="header">
 				<div id="titlebar">
 					<h1>Radiology Information System</h1>
+					
 				</div>
 			</div>
 				<div id="content-wrap" >
@@ -20,9 +21,10 @@
 							$res = getUserData($_SESSION['user_name']);
 							echo '<h1><u>Welcome '.$res[0][0].'</u></h1></br>';
 							echo "<a class='button' href='login/updateuseremailform.php'>Modify Account</a>&nbsp;&nbsp;&nbsp;&nbsp";
-							echo "<a class='button' href='login/updateuserpasswordform.php'>Change Password</a>";
+							echo "<a class='button' href='login/updateuserpasswordform.php'>Change Password</a></br>";
+							echo "<h2><a class='button' href='search/searchform.php'>Search Radiology Record</a></h2>";
 							if($res[0][2] == 'a'){
-								echo '<h2></br><a class="button" href="insertpersonform.php">Insert Person</a></h2>
+								echo '<h2><a class="button" href="insertpersonform.php">Insert Person</a></h2>
 								<h2><a class="button" href="updatepersonform.php">Update Person</a></h2>
 								<h2><a class="button" href="insertuserform.php">Insert User</a></h2>
 								<h2><a class="button" href="updateuserform.php">Update User</a></h2>
@@ -79,7 +81,8 @@ jQuery(document).ready(function(){
 					$("#profile").html("<a class='button' href='login/logout.php' id='logout'>Logout</a></br></br>");
 					$("#profile").append('<h1><u>Welcome '+data['username']+'</u></h1></br>');
 					$("#profile").append('<a class="button" href="login/updateuseremailform.php">Modify Account</a>&nbsp;&nbsp;&nbsp;&nbsp');
-					$("#profile").append('<a class="button" href="login/updateuserpasswordform.php">Change Password</a>');
+					$("#profile").append('<a class="button" href="login/updateuserpasswordform.php">Change Password</a></br>');
+					$("#profile").append('<h2><a class="button" href="search/searchform.php">Search Radiology Record</a></h2>');
 					if(data['class'] == 'a'){
 						$("#profile").append('<h2></br><a class="button" href="insertpersonform.php">Insert Person</a></h2>'
 						+'<h2><a class="button" href="updatepersonform.php">Update Person</a></h2>'

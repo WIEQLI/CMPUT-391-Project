@@ -59,7 +59,6 @@ if($errorcode[0]) {
 
 		//Gets record id
 		$record_id = getTableId($conn,'radiologyrecord');
-		
 
 		//Starts session
 		session_start();
@@ -72,35 +71,27 @@ if($errorcode[0]) {
 
 		//Executes sql command
 		$num = executeCommand($conn,$sql);
+		
 		$i = 1;
-		foreach ($_FILES['imageuploads']['tmp_name'] as $filename) {
+		foreach ($_FILES['imageuploads']['tmp_name'] as $key => $tmp_name) {
 			//Creates smaller images
-			//$thumb = resize($filename,0.5,'temp.jpeg');
-			//$thumb2 = resize($filename,0.75,'temp2.jpeg');
-
+			 $path = resize($_FILES['imageuploads']['tmp_name'][$key],0.5,$_FILES['imageuploads']['type'][$key],false);
+			 $path2 = resize($_FILES['imageuploads']['tmp_name'][$key],0.25,$_FILES['imageuploads']['type'][$key],true);
+				
 			//Uploads images to db
-    		uploadImage($conn,file_get_contents($filename),$record_id,$i);
-			//insertImage($conn,file_get_contents('temp.jpeg'),$record_id,$i);
-			//insertImage($conn,file_get_contents('temp2.jpeg'),$record_id,$i);
+    		uploadImage($conn,file_get_contents($_FILES['imageuploads']['tmp_name'][$key]),file_get_contents($path),file_get_contents($path2),$record_id,$i);
 
 			//Destroys images;
-			//imagedestroy($thumb);
-			//imagedestroy($thumb2);
+			//imagedestroy($path);
+			//imagedestroy($path2);
 			$i++;
 		}
-		
-		//$thumb = resize($_FILES['imageuploads']['tmp_name'],0.5,'temp.jpeg');
-		
-		//uploadImage($conn,file_get_contents('coolbean.jpeg'),$record_id,12);
-
-		//imagedestroy($thumb);
-
 		//Closes connection
 		oci_close($conn);
 
 		if($num[1]) {
 			//Returns status of .php code and messages
-			echo json_encode(array('status'=>true,'message'=>'Successfully added radiology record'));
+			echo json_encode(array('status'=>true,'message'=>$d));
 		}
 		else {
 			//Returns status of .php code and messages
@@ -167,65 +158,88 @@ function getUserData($conn,$username){
 	return $num;
 }
 
-//Upload Image
-function uploadImage($conn,$image,$record_id,$i){
-	$sql = 'INSERT INTO pacs_images (full_size,record_id,image_id) VALUES(empty_blob(),\''.$record_id.'\',\''.$i.'\') RETURNING full_size INTO :full_size';
-	$result = oci_parse($conn, $sql);
+//Upload Images based off code from James Hodgson, Tyler Wendlandt, Troy Murphy
+function uploadImage($conn,$image,$image2,$image3,$record_id,$i){
 	$blob = oci_new_descriptor($conn, OCI_D_LOB);
-	oci_bind_by_name($result, ":full_size", $blob, -1, OCI_B_BLOB);
-	oci_execute($result, OCI_DEFAULT) or die ("Unable to execute query");
+	$blob2 = oci_new_descriptor($conn, OCI_D_LOB);
+	$blob3 = oci_new_descriptor($conn, OCI_D_LOB);
 
-	if(!$blob->save($image)) {
-	    oci_rollback($conn);
+	$sql = 'insert into pacs_images (record_id, image_id, thumbnail, regular_size, full_size) values(:recordid, :imageid, empty_blob(), empty_blob(), empty_blob()) returning thumbnail, regular_size, full_size into :thumbnail, :regularsize, :fullsize';
+
+	$result = oci_parse($conn, $sql);
+
+	oci_bind_by_name($result, ':recordid', $record_id);
+	oci_bind_by_name($result, ':imageid', $i);
+	oci_bind_by_name($result, ':regularsize',$blob, -1, OCI_B_BLOB);
+	oci_bind_by_name($result, ':thumbnail',$blob2, -1, OCI_B_BLOB);
+	oci_bind_by_name($result, ':fullsize',$blob3, -1, OCI_B_BLOB);
+	
+	oci_execute($result, OCI_DEFAULT);
+
+	if($blob->save($image) && $blob2->save($image2) && $blob3->save($image3)) {
+		oci_commit($conn);
 	}
 	else {
-	    oci_commit($conn);
+		oci_rollback($conn);
 	}
-
-	oci_free_statement($result);
+	//oci_free_statement($result);
 	$blob->free();
+	$blob2->free();
+	$blob3->free();
 }
 
-//Insert Image
-function insertImage($conn,$image,$record_id,$i){
-	$sql = 'UPDATE pacs_images SET regular_size = empty_blob() WHERE record_id =\''.$record_id.'\' AND image_id = \''.$i.'\' RETURNING regular_size INTO :regular_size';
-	$result = oci_parse($conn, $sql);
-	$blob = oci_new_descriptor($conn, OCI_D_LOB);
-	oci_bind_by_name($result, ":regular_size", $blob, -1, OCI_B_BLOB);
-	oci_execute($result, OCI_DEFAULT) or die ("Unable to execute query");
-
-	if(!$blob->save($image)) {
-	    oci_rollback($conn);
+function resize($filename,$percent,$type,$isSmall) {
+	$original_info = getimagesize($filename);
+	$original_w = $original_info[0];
+	$original_h = $original_info[1];
+	if($type == 'image/jpeg') {
+		$original_img = imagecreatefromjpeg($filename);
 	}
-	else {
-	    oci_commit($conn);
+	if($type == 'image/jpg') {
+		$original_img = imagecreatefromjpg($filename);
 	}
-
-	oci_free_statement($result);
-	$blob->free();
-}
-
-function resize($filename,$percent,$path) {
-	$filename = $_FILES['imageuploads']['tmp_name'];
-	$percent = 0.5;
-	list($width, $height) = getimagesize($filename);
-	
-	$newwidth = $width * $percent;
-	$newheight = $height * $percent;
-
-	// Load
-	$thumb = imagecreatetruecolor($newwidth, $newheight);
-	$source = imagecreatefromjpeg($filename);
-
-	// Resize
-	imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-
-	// Output and free memory
-	//the resized image will be 400x300
-	imagejpeg($thumb,$path);
-	//imagedestroy($thumb);
-	return $thumb;
-	
+	if($type == 'image/png') {
+		$original_img = imagecreatefrompng($filename);
+	}
+	$thumb_w = $original_w * $percent;
+	$thumb_h = $original_h * $percent;
+	$thumb_img = imagecreatetruecolor($thumb_w, $thumb_h);
+	imagecopyresampled($thumb_img, $original_img,0, 0,0, 0,$thumb_w, $thumb_h,$original_w, $original_h);
+	if($type == 'image/jpeg') {
+		
+		if($isSmall) {
+			imagejpeg($thumb_img, 'temp2.jpeg');
+			return 'temp2.jpeg';
+		}
+		else {
+			imagejpeg($thumb_img, 'temp.jpeg');
+			return 'temp.jpeg';
+		}
+	}
+	if($type == 'image/jpg') {
+		
+		if($isSmall) {
+			imagejpg($thumb_img, 'temp2.jpg');
+			return 'temp2.jpg';
+		}
+		else {
+			imagejpg($thumb_img, 'temp.jpg');
+			return 'temp.jpg';
+		}
+	}
+	if($type == 'image/png') {
+		
+		if($isSmall) {
+			imagepng($thumb_img, 'temp2.png');
+			return 'temp2.png';
+		}
+		else {
+			imagepng($thumb_img, 'temp.png');
+			return 'temp.png';
+		}
+	}
+	//destroyimage($thumb_img);
+	//destroyimage($original_img);
 }
 
 

@@ -6,9 +6,9 @@
 		$res = getUserData($_SESSION['user_name']);
 		if($res[0][2] == 'r'){
 ?>
+<!DOCTYPE html>
 <html>
 	<head>
-		<!-- http://www.fyneworks.com/jquery/multiple-file-upload/  For multiple uploads-->
 		<link rel="stylesheet" type="text/css" href="../stylesheets/generalstylesheet.css">
 		<script src="http://code.jquery.com/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 		<script src="jquery.MultiFile.js" type="text/javascript" language="javascript"></script>
@@ -36,7 +36,7 @@
 						<label for="pdate">*Prescribing Date (YYYY-MM-DD):</label><input id="pdate" name="pdate" type="text"></br>
 						<label for="diagnosis">*Diagnosis:</label><textarea id="diagnosis" rows=2 cols=70 name="diagnosis" type="text"></textarea></br>
 						<label for="desc">*Description:</label><textarea id="desc" rows=10 cols=70 name="desc" type="text"></textarea></br>
-						<label for="imageupload">*Image(s) to include:</label><input id="imageupload" name="imageuploads" class='multi' type="file"/></br>
+						<label for="imageupload">*Image(s) to include:</label><input id="imageupload" name="imageuploads" type="file"/></br>
 						<input type="submit" name="submit" value="Create radiology record">
 					</form>
 				</div>
@@ -125,7 +125,8 @@ jQuery(document).ready(function(){
 					}
 				}
 				//Display message into alert box
-				$("#alertbox").html(data["message"]);
+				//$('#alertbox').append('<img src="data:image/png;base64,'+ data['message']+'"></img>');
+				$('#alertbox').append(data['message']);
 			},
 			error   : function(){
 				alert('Something wrong');
