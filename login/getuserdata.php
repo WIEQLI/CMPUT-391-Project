@@ -10,6 +10,9 @@ function getUserData($username){
 	//Executes sql command
 	$num = executeCommand($conn,'SELECT user_name, password, class, date_registered, person_id FROM users WHERE user_name =\''.$username.'\'');
 
+	//Closes connection
+	//oci_close($conn);
+
 	return $num;
 }
 ?>

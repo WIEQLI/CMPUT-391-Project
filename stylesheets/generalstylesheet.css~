@@ -155,7 +155,7 @@ height:30px;
 -webkit-border-radius: 15px;
 -moz-border-radius: 15px;
 border-radius: 15px;
-border: 1p solid #999;
+border: 1px solid #999;
 }
 
 input.button:hover {
@@ -171,23 +171,16 @@ textarea
 {
    resize: none;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+li {
+text-decoration: none;
+list-style-position:inside;
+border: 1px solid black;
+}
+li a{
+text-decoration: none;
+color:black;
+}
+#rbuttons input{
+display:inline-block !important;
+}
 

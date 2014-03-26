@@ -1,5 +1,5 @@
 <?php
-function executeCommand($conn,$sql) {
+function executeCommand2($conn,$sql) {
 	//Prepares sql using connection and returns statement identifier	
 	$stid = oci_parse($conn,$sql);
 

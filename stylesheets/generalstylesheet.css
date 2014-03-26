@@ -171,23 +171,14 @@ textarea
 {
    resize: none;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+li {
+text-decoration: none;
+list-style-position:inside;
+border: 1px solid black;
+}
+li a{
+text-decoration: none;
+color:black;
+}
 
 

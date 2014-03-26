@@ -72,6 +72,7 @@ if($errorcode[0]) {
 		//Executes sql command
 		$num = executeCommand($conn,$sql);
 		
+		//Cycles through uploaded images and adds them to pacs_images
 		$i = 1;
 		foreach ($_FILES['imageuploads']['tmp_name'] as $key => $tmp_name) {
 			//Creates smaller images
@@ -79,7 +80,7 @@ if($errorcode[0]) {
 			 $path2 = resize($_FILES['imageuploads']['tmp_name'][$key],0.25,$_FILES['imageuploads']['type'][$key],true);
 				
 			//Uploads images to db
-    		uploadImage($conn,file_get_contents($_FILES['imageuploads']['tmp_name'][$key]),file_get_contents($path),file_get_contents($path2),$record_id,$i);
+    			uploadImage($conn,file_get_contents($_FILES['imageuploads']['tmp_name'][$key]),file_get_contents($path),file_get_contents($path2),$record_id,$i);
 
 			//Destroys images;
 			//imagedestroy($path);
@@ -91,7 +92,7 @@ if($errorcode[0]) {
 
 		if($num[1]) {
 			//Returns status of .php code and messages
-			echo json_encode(array('status'=>true,'message'=>$d));
+			echo json_encode(array('status'=>true,'message'=>'Radiology Record Successfully added'));
 		}
 		else {
 			//Returns status of .php code and messages
@@ -158,7 +159,7 @@ function getUserData($conn,$username){
 	return $num;
 }
 
-//Upload Images based off code from James Hodgson, Tyler Wendlandt, Troy Murphy
+//Upload Images based off code from James Hodgson, Tyler Wendlandt, Troy Murphy SQL 
 function uploadImage($conn,$image,$image2,$image3,$record_id,$i){
 	$blob = oci_new_descriptor($conn, OCI_D_LOB);
 	$blob2 = oci_new_descriptor($conn, OCI_D_LOB);
@@ -187,7 +188,7 @@ function uploadImage($conn,$image,$image2,$image3,$record_id,$i){
 	$blob2->free();
 	$blob3->free();
 }
-
+//Resizes images based upon images given
 function resize($filename,$percent,$type,$isSmall) {
 	$original_info = getimagesize($filename);
 	$original_w = $original_info[0];

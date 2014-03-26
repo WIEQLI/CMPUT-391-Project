@@ -61,6 +61,9 @@ jQuery(document).ready(function(){
 				//Parses JSON data 
 				var data = $.parseJSON(data);  
 
+				//Clears text in alert box
+				$('#alertbox').val('');
+
 				//Resets input highlights
 				$('input').css('border','1px solid #999');
 

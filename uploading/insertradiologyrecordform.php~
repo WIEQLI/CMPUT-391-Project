@@ -36,7 +36,7 @@
 						<label for="pdate">*Prescribing Date (YYYY-MM-DD):</label><input id="pdate" name="pdate" type="text"></br>
 						<label for="diagnosis">*Diagnosis:</label><textarea id="diagnosis" rows=2 cols=70 name="diagnosis" type="text"></textarea></br>
 						<label for="desc">*Description:</label><textarea id="desc" rows=10 cols=70 name="desc" type="text"></textarea></br>
-						<label for="imageupload">*Image(s) to include:</label><input id="imageupload" name="imageuploads" type="file"/></br>
+						<label for="imageupload">*Image(s) to include:</label><input id="imageupload" name="imageuploads[]" type="file" multiple/></br>
 						<input type="submit" name="submit" value="Create radiology record">
 					</form>
 				</div>

@@ -1,5 +1,5 @@
 <?php
-function executeCommand($conn,$sql) {
+function executeCommand2($conn,$sql) {
 	//Prepares sql using connection and returns statement identifier	
 	$stid = oci_parse($conn,$sql);
 
@@ -14,7 +14,7 @@ function executeCommand($conn,$sql) {
 	}
 	else{
 		//Fetches results of oci_parse and outputs it as array
-		$num = oci_fetch_all($stid,$res);
+		$num = oci_fetch_all($stid,$res, null, null, OCI_FETCHSTATEMENT_BY_ROW + OCI_NUM); 
 
 		// Frees the statement identifier
 		oci_free_statement($stid);

@@ -12,6 +12,12 @@ DROP TABLE persons;
 DROP SEQUENCE seq_persons_id;
 DROP SEQUENCE seq_radiologyrecord_id;
 
+DROP INDEX rad_rec_diagnosis;
+DROP INDEX rad_rec_description;
+DROP INDEX rad_rec_test_type;
+DROP INDEX person_first_name;
+DROP INDEX person_last_name;
+
 /*
  *  To store the personal information
  */
@@ -90,4 +96,26 @@ CREATE TABLE pacs_images (
 
 INSERT INTO persons VALUES(1,'admin','admin','admin','admin','admin');
 INSERT INTO users VALUES('admin','admin','a',1,sysdate);
+
+/*Builds the inverted Indexs we need. They are set tp update on commit*/
+CREATE INDEX rad_rec_diagnosis on radiology_record(diagnosis)
+INDEXTYPE IS CTXSYS.CONTEXT
+parameters ('sync (on commit)');
+
+CREATE INDEX rad_rec_description on radiology_record(description)
+INDEXTYPE IS CTXSYS.CONTEXT
+parameters ('sync (on commit)');
+
+CREATE INDEX rad_rec_test_type on radiology_record(test_type)
+INDEXTYPE IS CTXSYS.CONTEXT
+parameters ('sync (on commit)');
+
+CREATE INDEX person_first_name on persons(first_name)
+INDEXTYPE is CTXSYS.CONTEXT
+parameters ('sync (on commit)');
+
+CREATE INDEX person_last_name on persons(last_name)
+INDEXTYPE is CTXSYS.CONTEXT
+parameters ('sync (on commit)');
+
 commit;
