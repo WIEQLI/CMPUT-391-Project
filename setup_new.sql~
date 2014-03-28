@@ -12,6 +12,13 @@ DROP TABLE persons;
 DROP SEQUENCE seq_persons_id;
 DROP SEQUENCE seq_radiologyrecord_id;
 
+DROP INDEX rad_rec_diagnosis;
+DROP INDEX rad_rec_description;
+DROP INDEX rad_rec_test_type;
+DROP INDEX person_first_name;
+DROP INDEX person_last_name;
+DROP VIEW g_records;
+
 /*
  *  To store the personal information
  */
@@ -112,5 +119,9 @@ CREATE INDEX person_last_name on persons(last_name)
 INDEXTYPE is CTXSYS.CONTEXT
 parameters ('sync (on commit)');
 
-exit;
+CREATE VIEW g_records (patient_id,test_type,test_date, record_id)
+AS SELECT patient_id, test_type, test_date, record_id
+FROM radiology_record
+GROUP BY CUBE (patient_id, test_type, test_date, record_id);
+
 commit;

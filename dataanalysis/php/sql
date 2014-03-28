@@ -1,0 +1,4 @@
+SELECT r.record_id, r.test_type, r.test_date
+FROM radiology_record r
+GROUP BY CUBE  (r.record_id, r.test_type, r.test_date);
+

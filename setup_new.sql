@@ -17,6 +17,7 @@ DROP INDEX rad_rec_description;
 DROP INDEX rad_rec_test_type;
 DROP INDEX person_first_name;
 DROP INDEX person_last_name;
+DROP VIEW g_records;
 
 /*
  *  To store the personal information
@@ -117,5 +118,10 @@ parameters ('sync (on commit)');
 CREATE INDEX person_last_name on persons(last_name)
 INDEXTYPE is CTXSYS.CONTEXT
 parameters ('sync (on commit)');
+
+CREATE VIEW g_records (patient_id,test_type,test_date,image_id)
+AS SELECT r.patient_id, r.test_type, r.test_date, p.image_id
+FROM radiology_record r, pacs_images p
+WHERE r.record_id = p.record_id;
 
 commit;

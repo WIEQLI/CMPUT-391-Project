@@ -133,6 +133,17 @@ height: 25px;
 box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
 }
 
+.checkbox {
+width:150px;
+display:block-inline;
+border: 1px solid #999;
+height: 25px;
+-webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+-moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+
+}
+
 //http://www.sitepoint.com/style-web-forms-css/
 textarea#feedback {
 width:375px;
@@ -153,7 +164,9 @@ color:#fff;
 font-family: Tahoma, Geneva, sans-serif;
 height:30px;
 -webkit-border-radius: 15px;
--moz-border-radius: 15px;
+-moz-border-radius: 15px;Patient Id:	Test Type:	Time Period:
+2	zombie	09
+	2	zombie	04
 border-radius: 15px;
 border: 1px solid #999;
 }
@@ -180,5 +193,16 @@ li a{
 text-decoration: none;
 color:black;
 }
+
+table{
+width:550px !important;
+border: 1px solid black;
+}
+td {
+border: 1px solid black;
+text-align:center; 
+}
+
+
 
 

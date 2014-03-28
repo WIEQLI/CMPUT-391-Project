@@ -29,7 +29,7 @@
 								<h2><a class="button" href="insertuserform.php">Insert User</a></h2>
 								<h2><a class="button" href="updateuserform.php">Update User</a></h2>
 								<h2><a class="button" href="insertfamilydoctorform.php">Insert Family Doctor</a></h2>
-								<h2><a class="button" href="updatefamilydoctorform.php">Update Family Doctor</a></h2>';
+								<h2><a class="button" href="updatefamilydoctorform.php">Update Family Doctor</a></h2>								<h2><a class="button" href="dataanalysis/dataanalysisform.php">Data Analysis</a></h2>';
 							}
 							if($res[0][2] == 'r'){
 								echo '<h2></br><a class="button" href="uploading/insertradiologyrecordform.php">Insert Radiology Record</a></h2>';
@@ -89,7 +89,8 @@ jQuery(document).ready(function(){
 						+'<h2><a class="button" href="insertuserform.php">Insert User</a></h2>'
 						+'<h2><a class="button" href="updateuserform.php">Update User</a></h2>'
 						+'<h2><a class="button" href="insertfamilydoctorform.php">Insert Family Doctor</a></h2>'
-						+'<h2><a class="button" href="updatefamilydoctorform.php">Update Family Doctor</a></h2>');
+						+'<h2><a class="button" href="updatefamilydoctorform.php">Update Family Doctor</a></h2>'
+						+'<h2><a class="button" href="dataanalysis/dataanalysisform.php">Data Analysis</a></h2>');
 					}
 					if(data['class'] == 'r'){
 						$("#profile").append('<h2></br><a class="button" href="uploading/insertradiologyrecordform.php">Insert Radiology Record</a></h2>');
