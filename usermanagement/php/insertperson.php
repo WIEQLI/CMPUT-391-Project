@@ -1,8 +1,8 @@
 <?php
 //Inserts general functions
-require('/compsci/webdocs/kjross/web_docs/usermanagement/php/processfield.php');
-require('/compsci/webdocs/kjross/web_docs/usermanagement/php/checkfieldlength.php');
-require('/compsci/webdocs/kjross/web_docs/usermanagement/php/checkfieldempty.php');
+require('processfield.php');
+require('checkfieldlength.php');
+require('checkfieldempty.php');
 
 //Create errorcode array that hold status of errors and messages
 $errorcode = array(true,'');
@@ -30,9 +30,9 @@ $errorcode = checkFieldLength(10,$phone,"Please enter a phone number with less t
 
 //If passes all checks
 if($errorcode[0]) {
-	require('/compsci/webdocs/kjross/web_docs/database/dbconnect.php');
-	require('/compsci/webdocs/kjross/web_docs/database/gettableid.php');
-	require('/compsci/webdocs/kjross/web_docs/database/executecommand.php');
+	require('../../database/dbconnect.php');
+	require('../../database/gettableid.php');
+	require('../../database/executecommand.php');
 
 	//Establish connection to database
 	$conn = dbConnect();

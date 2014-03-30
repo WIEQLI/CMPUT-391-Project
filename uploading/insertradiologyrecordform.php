@@ -1,7 +1,7 @@
 <?php session_start();
 	//Checks login has been done and is an radiologist
 	if(isset($_SESSION['user_name'])){
-		require('/compsci/webdocs/kjross/web_docs/login/getuserdata.php');
+		require('../login/getuserdata.php');
 		//Obtaining user data
 		$res = getUserData($_SESSION['user_name']);
 		if($res[0][2] == 'r'){
@@ -11,8 +11,6 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="../stylesheets/generalstylesheet.css">
 		<script src="http://code.jquery.com/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
-		<script src="jquery.MultiFile.js" type="text/javascript" language="javascript"></script>
-		
 		
 		<title>Insert Radiology Record</title>
 	</head>
@@ -140,9 +138,9 @@ jQuery(document).ready(function(){
 });
 </script>
 </html>
-<?php }else{ echo header('Location:loginform.php');}}
+<?php }else{ echo header('Location:../login/loginform.php');}}
 	//Redirect to login if fails
 	else {
-		header('Location:loginform.php');
+		header('Location:../login/loginform.php');
 	}
 ?>

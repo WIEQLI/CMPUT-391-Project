@@ -1,15 +1,15 @@
 <?php session_start();
 	//Checks login has been done and is an administrator
 	if(isset($_SESSION['user_name'])){
-		require('/compsci/webdocs/kjross/web_docs/login/getuserdata.php');
+		require('../login/getuserdata.php');
 		//Obtaining user data
 		$res = getUserData($_SESSION['user_name']);
 		if($res[0][2] == 'a'){
 ?>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="stylesheets/generalstylesheet.css">
-		<script type="text/javascript" src="jquery1.1.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../stylesheets/generalstylesheet.css">
+		<script type="text/javascript" src="../jquery1.1.min.js"></script>
 		<title>Insert Person</title>
 	</head>
 	<body> 
@@ -24,7 +24,7 @@
 					<h3>*required field</h3>
 					<div id="alertbox">
 					</div>
-					<form name="form1" action='usermanagement/php/insertperson.php' method="post" class='ajaxform'>
+					<form name="form1" action='php/insertperson.php' method="post" class='ajaxform'>
 						
 						<label for="firstname">*First Name:</label><input id="firstname" name="firstname" type="text"></br>
 						<label for="lastname">*Last Name:</label><input id="lastname" name="lastname" type="text"></br>
@@ -104,9 +104,9 @@ jQuery(document).ready(function(){
 });
 </script>
 </html>
-<?php }else{ echo header('Location:loginform.php');}}
+<?php }else{ echo header('Location:../login/loginform.php');}}
 	//Redirect to login if fails
 	else {
-		header('Location:loginform.php');
+		header('Location:../login/loginform.php');
 	}
 ?>

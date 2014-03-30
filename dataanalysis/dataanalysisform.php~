@@ -75,7 +75,10 @@ jQuery(document).ready(function(){
 					var rArray = data['rArray'];
 					$('#report').html('');	
 					var temp = '';
+					// Make table title
 					temp += '<tr><td>Patient Id:</td><td>Test Type:</td><td>Time Period:</td><td>Number of Images:</td></tr>';	
+
+					//Add rows to table
 					for(var i=0; i < rArray.length;i++){
 						j = 0;
 						temp += '<tr>';

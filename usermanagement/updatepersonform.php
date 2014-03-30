@@ -1,15 +1,15 @@
 <?php session_start();
 	//Checks login has been done and is an administrator
 	if(isset($_SESSION['user_name'])){
-		require('/compsci/webdocs/kjross/web_docs/login/getuserdata.php');
+		require('../login/getuserdata.php');
 		//Obtaining user data
 		$res = getUserData($_SESSION['user_name']);
 		if($res[0][2] == 'a'){
 ?>
 <html>
 	<head>
-	<link rel="stylesheet" type="text/css" href="stylesheets/generalstylesheet.css">
-	<script type="text/javascript" src="jquery1.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../stylesheets/generalstylesheet.css">
+	<script type="text/javascript" src="../jquery1.1.min.js"></script>
 		<title>Update Person</title>
 	</head>
 	<body> 
@@ -21,7 +21,7 @@
 			</div>
 			<div id="content-wrap" class="styleform">
 				<h2>Update Person</h2>
-				<form id='form1' name="form1" action='usermanagement/php/searchperson.php' method="post" class='ajaxform'>
+				<form id='form1' name="form1" action='php/searchperson.php' method="post" class='ajaxform'>
 					<label><u>Find Person</u></label><br/>						
 					<label for="email">Email:</label><input id="email" name="email" type="text"></br>					
 					<input type="submit" name="submit" value="Find User">
@@ -29,7 +29,7 @@
 				<div id="alertbox">
 				</div>
 				<br/>
-				<form id='form2' name="form2" action='usermanagement/php/updateperson.php' method="post" class='ajaxform2'>
+				<form id='form2' name="form2" action='php/updateperson.php' method="post" class='ajaxform2'>
 					<label><u>Update Person</u></label><br/>	
 					<input id="person_id" name="person_id" visibility="hidden" type="text">
 					<input id="email3" name="email3" visibility="hidden" type="text">
@@ -163,9 +163,9 @@ jQuery(document).ready(function(){
 	</script>
 
 </html>
-<?php }else{ echo header('Location:loginform.php');}}
+<?php }else{ echo header('Location:../login/loginform.php');}}
 	//Redirect to login if fails
 	else {
-		header('Location:loginform.php');
+		header('Location:../login/loginform.php');
 	}
 ?>

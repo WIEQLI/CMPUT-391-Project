@@ -1,15 +1,15 @@
 <?php session_start();
 	//Checks login has been done and is an administrator
 	if(isset($_SESSION['user_name'])){
-		require('/compsci/webdocs/kjross/web_docs/login/getuserdata.php');
+		require('../login/getuserdata.php');
 		//Obtaining user data
 		$res = getUserData($_SESSION['user_name']);
 		if($res[0][2] == 'a'){
 ?>
 <html>
 	<head>
-	<link rel="stylesheet" type="text/css" href="stylesheets/generalstylesheet.css">
-	<script type="text/javascript" src="jquery1.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../stylesheets/generalstylesheet.css">
+	<script type="text/javascript" src="../jquery1.1.min.js"></script>
 		<title>Update Family Doctor</title>
 	</head>
 	<body> 
@@ -25,13 +25,13 @@
 					<div id="alertbox">
 					</div>
 					
-					<form id='form1' name="form1" action='usermanagement/php/searchfamilydoctor.php' method="post" class='ajaxform'>
+					<form id='form1' name="form1" action='php/searchfamilydoctor.php' method="post" class='ajaxform'>
 						<h4><u>Search for family doctor</u></h4>
 						<label for="email">*Email from doctor:</label><input id="email" name="email" type="text"></br>
 						<label for="email2">*Email from patient:</label><input id="email2" name="email2" type="text"></br>
 						<input type="submit" name="submit" value="Search family doctor">
 					</form></br>
-					<form id='form2' name="form2" action='usermanagement/php/updatefamilydoctor.php' method="post" class='ajaxform2'>
+					<form id='form2' name="form2" action='php/updatefamilydoctor.php' method="post" class='ajaxform2'>
 						<input id="doctor_id" name="doctor_id" visibility="hidden" type="text">
 						<input id="patient_id" name="patient_id" visibility="hidden" type="text">
 						<h4><u>Enter emails for doctor and patient to update</u></h4>
@@ -74,8 +74,6 @@ jQuery(document).ready(function(){
 					//Clears input boxes
 					$('#email').val('');
 					$('#email2').val('');
-					alert(data['d_email']);
-					alert(data['p_email']);
 
 					//Populate inputs for transering data
 					$('#doctor_id').val(data['d_email']);
@@ -166,9 +164,9 @@ jQuery(document).ready(function(){
 	</script>
 
 </html>
-<?php }else{ echo header('Location:loginform.php');}}
+<?php }else{ echo header('Location:../login/loginform.php');}}
 	//Redirect to login if fails
 	else {
-		header('Location:loginform.php');
+		header('Location:../login/loginform.php');
 	}
 ?>

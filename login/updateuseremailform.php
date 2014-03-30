@@ -15,7 +15,7 @@
 					<h1>Radiology Information System</h1>
 				</div>
 			</div>
-				<a href="../loginform.php">Back</a>
+				<a href="loginform.php">Back</a>
 				<div id="content-wrap" class="styleform">
 					<h2>Update Email</h2>
 					<h3>*required field</h3>
@@ -84,6 +84,6 @@ jQuery(document).ready(function(){
 <?php 	}
 	//Redirect to login if fails
 	else {
-		header('Location:../loginform.php');
+		header('Location:loginform.php');
 	}
 ?>

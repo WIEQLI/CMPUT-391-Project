@@ -1,7 +1,7 @@
 <?php session_start();
 	//Checks login has been done and is an administrator
 	if(isset($_SESSION['user_name'])){
-		require('/compsci/webdocs/kjross/web_docs/login/getuserdata.php');
+		require('../login/getuserdata.php');
 		//Obtaining user data
 		$res = getUserData($_SESSION['user_name']);
 		if($res[0][2] == 'a'){
@@ -115,10 +115,10 @@ function addParameterToTable(temp,parameter,i,j,rArray) {
 </script>
 
 </html>
-<?php }else{ echo header('Location:loginform.php');}}
+<?php }else{ echo header('Location:../login/loginform.php');}}
 	//Redirect to login if fails
 	else {
-		header('Location:loginform.php');
+		header('Location:../login/loginform.php');
 	}
 ?>
 

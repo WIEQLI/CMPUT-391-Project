@@ -3,9 +3,9 @@
 $class = $_POST['classes'];
 $username  = $_POST['username3'];
 
-require('/compsci/webdocs/kjross/web_docs/database/dbconnect.php');
-require('/compsci/webdocs/kjross/web_docs/database/gettableid.php');
-require('/compsci/webdocs/kjross/web_docs/database/executecommand.php');
+require('../../database/dbconnect.php');
+require('../../database/gettableid.php');
+require('../../database/executecommand.php');
 
 //Establish connection to database
 $conn = dbConnect();

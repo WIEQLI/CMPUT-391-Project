@@ -84,6 +84,6 @@ jQuery(document).ready(function(){
 <?php }
 	//Redirect to login if fails
 	else {
-		header('Location:../loginform.php');
+		header('loginform.php');
 	}
 ?>
