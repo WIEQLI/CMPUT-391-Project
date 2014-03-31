@@ -34,7 +34,9 @@ Uses: searchrecords.php, generalstylesheets.css, jquery1.1.min.js
 
 				<form id='form1' name="form1" action='php/searchrecords.php' method="post" class='ajaxform'>
 					<label><u>Find Report</u></label><br/>						
-					<label for="diagnosis">Diagnosis:</label><input id="diagnosis" name="diagnosis" type="text"></br>					
+					<label for="diagnosis">Diagnosis:</label><input id="diagnosis" name="diagnosis" type="text"></br>
+					<label for="sdate">Start Year (YYYY-MM-DD):</label><input id="sdate" name="sdate" type="text"></br>
+					<label for="fdate">Finish Year (YYYY-MM-DD):</label><input id="fdate" name="fdate" type="text"></br>					
 					<input type="submit" name="submit" value="Find reports">
 				</form>
 

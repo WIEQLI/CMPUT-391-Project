@@ -9,6 +9,8 @@ $errorcode = array(true,'');
 
 //Processes fields text
 $diagnosis = strtolower(processField($_POST['diagnosis']));
+$sdate = $_POST['sdate'];
+$fdate = $_POST['fdate'];
 
 //Check that fields arent empty
 $errorcode = checkFieldEmpty($diagnosis,'Please enter a diagnosis <br/>',$errorcode);
@@ -24,7 +26,7 @@ if($errorcode[0] == 'true') {
 	//Establish connection to database
 	$conn = dbConnect();
 	
-	$row = findRecords($conn,$diagnosis,$errorcode);
+	$row = findRecords($conn,$diagnosis,$sdate,$fdate,$errorcode);
 
 	//Closes connection
 	oci_close($conn);
@@ -50,11 +52,10 @@ else {
 }
 
 
-function findRecords($conn,$diagnosis,$errorcode) {
+function findRecords($conn,$diagnosis,$sdate,$fdate,$errorcode) {
 
 	//Executes sql command
-	$num = executeCommand2($conn,'SELECT p.first_name, p.address, p.phone, r.test_date FROM persons p, radiology_record r WHERE r.diagnosis LIKE \'%' .$diagnosis. '%\' AND p.person_id = r.patient_id');
-
+	$num = executeCommand2($conn,'SELECT p.first_name, p.address, p.phone, r.test_date FROM persons p, radiology_record r WHERE r.diagnosis LIKE \'%' .$diagnosis. '%\' AND p.person_id = r.patient_id AND (r.test_date BETWEEN TO_DATE(\''.$sdate.'\', \'YYYY-MM-DD\') AND TO_DATE(\''.$fdate.'\', \'YYYY-MM-DD\'))');
 	
 	//If first name in list is blank return an errorcode
 	if(sizeof($num[0][0][0]) == 0) {

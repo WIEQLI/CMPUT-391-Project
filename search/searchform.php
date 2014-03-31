@@ -107,12 +107,14 @@ jQuery(document).ready(function(){
 });
 //Loads image in window when clicked
 function loadrecord(scr){
-	var record =  window.open('','Radiology Record','width=600,height=600');
-	var html = '<!DOCTYPE html><html><head><title></title></head><body><img width="600px" height="600px" src="'+scr+'"></img></body></html>';
+	var record =  window.open('','Radiology Record','width=1000,height=1000');
+	var script = '<script>function fullsize(){ document.getElementById("reg").style.width="100%";document.getElementById("reg").style.height="100%";}'+'<'+'/'+'script>';
+	var html = '<!DOCTYPE html><html><head><title></title></head><body><img id="reg" onclick="fullsize()" width="50%" height="50%" src="'+scr+'"></img></body>'+script+'</html>';
     	record.document.open();
     	record.document.write(html);
 	record.document.close();
 }
+
 </script>
 
 </html>

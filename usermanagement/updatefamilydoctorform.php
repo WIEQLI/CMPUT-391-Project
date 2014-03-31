@@ -126,7 +126,6 @@ jQuery(document).ready(function(){
 			success : function( data ) {
 				//Parses JSON data 
 				var data = $.parseJSON(data);
-				alert(data['d']);
 				
 				//Resets input highlights
 				$('input').css('border','1px solid #999');
