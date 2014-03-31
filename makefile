@@ -7,7 +7,7 @@
 
 install: 
 	cd database; \
-	sed -i '3s/.*/"$$"conn = oci_connect("$(u)","$(p)");/' dbconnect.php; \
-	sed -i '3s/"$$"/$$/' dbconnect.php; \
+	sed -i '7s/.*/"$$"conn = oci_connect("$(u)","$(p)");/' dbconnect.php; \
+	sed -i '7s/"$$"/$$/' dbconnect.php; \
 	cd ..; \
 	sqlplus $(u)/$(p) @install.sql;
