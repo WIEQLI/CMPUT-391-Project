@@ -112,6 +112,6 @@ function loadrecord(scr){
 <?php 	}
 	//Redirect to login if fails
 	else {
-		header('Location:../loginform.php');
+		header('Location:../login/loginform.php');
 	}
 ?>

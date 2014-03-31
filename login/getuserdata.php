@@ -1,8 +1,8 @@
 <?php
 //Gets users data based on username
 function getUserData($username){
-	require('/compsci/webdocs/kjross/web_docs/database/dbconnect.php');
-	require('/compsci/webdocs/kjross/web_docs/database/executecommand.php');
+	require('../database/dbconnect.php');
+	require('../database/executecommand.php');
 
 	//Establish connection to database
 	$conn = dbConnect();

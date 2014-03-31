@@ -1,8 +1,8 @@
 <?php
 //Inserts general functions
-require('/compsci/webdocs/kjross/web_docs/usermanagement/php/processfield.php');
-require('/compsci/webdocs/kjross/web_docs/usermanagement/php/checkfieldlength.php');
-require('/compsci/webdocs/kjross/web_docs/usermanagement/php/checkfieldempty.php');
+require('../usermanagement/php/processfield.php');
+require('../usermanagement/php/checkfieldlength.php');
+require('../usermanagement/php/checkfieldempty.php');
 
 //Create errorcode array that hold status of errors and messages
 $errorcode = array(true,'');

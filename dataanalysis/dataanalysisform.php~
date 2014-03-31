@@ -1,7 +1,7 @@
 <?php session_start();
 	//Checks login has been done and is an administrator
 	if(isset($_SESSION['user_name'])){
-		require('/compsci/webdocs/kjross/web_docs/login/getuserdata.php');
+		require('../login/getuserdata.php');
 		//Obtaining user data
 		$res = getUserData($_SESSION['user_name']);
 		if($res[0][2] == 'a'){
@@ -75,7 +75,10 @@ jQuery(document).ready(function(){
 					var rArray = data['rArray'];
 					$('#report').html('');	
 					var temp = '';
+					// Make table title
 					temp += '<tr><td>Patient Id:</td><td>Test Type:</td><td>Time Period:</td><td>Number of Images:</td></tr>';	
+
+					//Add rows to table
 					for(var i=0; i < rArray.length;i++){
 						j = 0;
 						temp += '<tr>';
@@ -112,10 +115,10 @@ function addParameterToTable(temp,parameter,i,j,rArray) {
 </script>
 
 </html>
-<?php }else{ echo header('Location:loginform.php');}}
+<?php }else{ echo header('Location:../login/loginform.php');}}
 	//Redirect to login if fails
 	else {
-		header('Location:loginform.php');
+		header('Location:../login/loginform.php');
 	}
 ?>
 

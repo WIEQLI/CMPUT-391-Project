@@ -1,8 +1,8 @@
 <?php
 //Inserts general functions
-require('/compsci/webdocs/kjross/web_docs/usermanagement/php/processfield.php');
-require('/compsci/webdocs/kjross/web_docs/usermanagement/php/checkfieldlength.php');
-require('/compsci/webdocs/kjross/web_docs/usermanagement/php/checkfieldempty.php');
+require('processfield.php');
+require('checkfieldlength.php');
+require('checkfieldempty.php');
 
 //Create errorcode array that hold status of errors and messages
 $errorcode = array(true,'');
@@ -17,9 +17,9 @@ $errorcode = checkFieldEmpty($username,'Please enter an username <br/>',$errorco
 $errorcode = checkFieldLength(24,$username,"Please enter an username with less then 28 characters <br/>",$errorcode);
 
 if($errorcode[0] == 'true') {
-	require('/compsci/webdocs/kjross/web_docs/database/dbconnect.php');
-	require('/compsci/webdocs/kjross/web_docs/database/gettableid.php');
-	require('/compsci/webdocs/kjross/web_docs/database/executecommand.php');
+	require('../../database/dbconnect.php');
+	require('../../database/gettableid.php');
+	require('../../database/executecommand.php');
 	
 	//Establish connection to database
 	$conn = dbConnect();

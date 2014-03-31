@@ -1,9 +1,9 @@
 <?php
 
 //Inserts general functions
-require('/compsci/webdocs/kjross/web_docs/usermanagement/php/processfield.php');
-require('/compsci/webdocs/kjross/web_docs/usermanagement/php/checkfieldlength.php');
-require('/compsci/webdocs/kjross/web_docs/usermanagement/php/checkfieldempty.php');
+require('processfield.php');
+require('checkfieldlength.php');
+require('checkfieldempty.php');
 
 //Create errorcode array that hold status of errors and messages
 $errorcode = array(true,'');
@@ -23,8 +23,8 @@ $errorcode = checkFieldLength(128,$p_email,"Please enter a patients email with l
 
 //If passes all checks
 if($errorcode[0]) {
-	require('/compsci/webdocs/kjross/web_docs/database/dbconnect.php');
-	require('/compsci/webdocs/kjross/web_docs/database/executecommand.php');
+	require('../../database/dbconnect.php');
+	require('../../database/executecommand.php');
 
 	//Establish connection to database
 	$conn = dbConnect();
@@ -32,6 +32,10 @@ if($errorcode[0]) {
 	//Checks if email exists within person
 	$errorcode = checkEmailExists($conn,$d_email,$errorcode,'Doctor');
 	$errorcode = checkEmailExists($conn,$p_email,$errorcode,'Patient');
+
+	//Checks if person belong to right clas
+	$errorcode = checkIsClass($conn,$d_email,$errorcode,'d');
+	$errorcode = checkIsClass($conn,$p_email,$errorcode,'p');
 
 	//If emails exists
 	if($errorcode[0]) {
@@ -90,6 +94,19 @@ function checkEmailExists($conn,$email,$errorcode,$typeUser) {
 	//If oci_parse doesnt find email within persons
 	if($num[0][0] == 0) {
 		$errorcode[1] =  $errorcode[1].$typeUser.' doesnt exist with that email. Insert new email or create person with that email. <br/>';
+		$errorcode[0] = false;	
+	}
+	return $errorcode;
+}
+
+//Checks if person is a doctor/patient
+function checkIsClass($conn,$email,$errorcode,$class) {
+	//Executes sql command
+	$num = executeCommand($conn,'SELECT COUNT(*) FROM persons p, users u WHERE p.email =\''.$email.'\' AND p.person_id = u.person_id AND u.class = \''.$class.'\'');
+
+	//If oci_parse doesnt find email within persons
+	if($num[0][0] > 0) {
+		$errorcode[1] =  $errorcode[1].$email.' is either not a patient/doctor please make sure you enter persons with right class. <br/>';
 		$errorcode[0] = false;	
 	}
 	return $errorcode;

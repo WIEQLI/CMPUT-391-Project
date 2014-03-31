@@ -2,8 +2,8 @@
 //Got date extraction code - based off code from James Hodgson, Tyler Wendlandt, Troy Murphy
 // Checks if one of the categories is checked
 if(isChecked('testtype') or isChecked('patientid') or isChecked('time')){
-	require('/compsci/webdocs/kjross/web_docs/database/dbconnect.php');
-	require('/compsci/webdocs/kjross/web_docs/database/executecommand2.php');
+	require('../../database/dbconnect.php');
+	require('../../database/executecommand2.php');
 	$temp = "SELECT ";
 	$temp2 = " GROUP BY ";
 	

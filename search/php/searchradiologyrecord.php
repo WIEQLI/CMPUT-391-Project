@@ -7,9 +7,9 @@ $keywords = str_replace(' ','|',$_POST['parameter']);
 
 //Checks if search parameter(s) exists
 if((!empty($s_date) and !empty($f_date)) or !empty($keywords)) {
-	require('/compsci/webdocs/kjross/web_docs/database/dbconnect.php');
-	require('/compsci/webdocs/kjross/web_docs/database/executecommand.php');
-	require('/compsci/webdocs/kjross/web_docs/database/executecommand2.php');
+	require('../../database/dbconnect.php');
+	require('../../database/executecommand.php');
+	require('../../database/executecommand2.php');
 	
 	//Create conditions for SQL statment
 	$conditions = '';

@@ -1,8 +1,8 @@
 <?php
 //Inserts general functions
-require('/compsci/webdocs/kjross/web_docs/usermanagement/php/processfield.php');
-require('/compsci/webdocs/kjross/web_docs/usermanagement/php/checkfieldlength.php');
-require('/compsci/webdocs/kjross/web_docs/usermanagement/php/checkfieldempty.php');
+require('processfield.php');
+require('checkfieldlength.php');
+require('checkfieldempty.php');
 
 //Create errorcode array that hold status of errors and messages
 $errorcode = array(true,'');
@@ -17,9 +17,9 @@ $errorcode = checkFieldEmpty($diagnosis,'Please enter a diagnosis <br/>',$errorc
 $errorcode = checkFieldLength(36,$diagnosis,"Please enter a diagnosis with less then 40 characters <br/>",$errorcode);
 
 if($errorcode[0] == 'true') {
-	require('/compsci/webdocs/kjross/web_docs/database/dbconnect.php');
-	require('/compsci/webdocs/kjross/web_docs/database/gettableid.php');
-	require('/compsci/webdocs/kjross/web_docs/database/executecommand2.php');
+	require('../../database/dbconnect.php');
+	require('../../database/gettableid.php');
+	require('../../database/executecommand2.php');
 	
 	//Establish connection to database
 	$conn = dbConnect();

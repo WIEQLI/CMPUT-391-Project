@@ -1,9 +1,9 @@
 <?php
 
 //Inserts general functions
-require('/compsci/webdocs/kjross/web_docs/usermanagement/php/processfield.php');
-require('/compsci/webdocs/kjross/web_docs/usermanagement/php/checkfieldlength.php');
-require('/compsci/webdocs/kjross/web_docs/usermanagement/php/checkfieldempty.php');
+require('../../usermanagement/php/processfield.php');
+require('../../usermanagement/php/checkfieldlength.php');
+require('../../usermanagement/php/checkfieldempty.php');
 
 //Create errorcode array that hold status of errors and messages
 $errorcode = array(true,'');
@@ -39,9 +39,9 @@ $errorcode = verifyDate($test_date,$errorcode);
 
 //If passes all checks
 if($errorcode[0]) {
-	require('/compsci/webdocs/kjross/web_docs/database/dbconnect.php');
-	require('/compsci/webdocs/kjross/web_docs/database/executecommand.php');
-	require('/compsci/webdocs/kjross/web_docs/database/gettableid.php');
+	require('../../database/dbconnect.php');
+	require('../../database/executecommand.php');
+	require('../../database/gettableid.php');
 
 	//Establish connection to database
 	$conn = dbConnect();
@@ -49,6 +49,10 @@ if($errorcode[0]) {
 	//Checks email exists in persons
 	$errorcode = checkEmailExists($conn,$d_email,$errorcode,'Doctor doesnt exist with that email. Insert new email or create person with that email.');
 	$errorcode = checkEmailExists($conn,$p_email,$errorcode,'Patient doesnt exist with that email. Insert new email or create person with that email.');
+
+	//Checks if person belong to right class
+	$errorcode = checkIsClass($conn,$d_email,$errorcode,'d');
+	$errorcode = checkIsClass($conn,$p_email,$errorcode,'p');
 
 	//If emails exist
 	if($errorcode[0]) {
@@ -83,8 +87,8 @@ if($errorcode[0]) {
     			uploadImage($conn,file_get_contents($_FILES['imageuploads']['tmp_name'][$key]),file_get_contents($path),file_get_contents($path2),$record_id,$i);
 
 			//Destroys images;
-			//imagedestroy($path);
-			//imagedestroy($path2);
+			imagedestroy($path);
+			imagedestroy($path2);
 			$i++;
 		}
 		//Closes connection
@@ -130,6 +134,19 @@ function checkEmailExists($conn,$email,$errorcode,$message) {
 	//If oci_parse doesnt find email within persons
 	if($num[0][0] == 0) {
 		$errorcode[1] = $message;
+		$errorcode[0] = false;	
+	}
+	return $errorcode;
+}
+
+//Checks if person is a doctor/patient
+function checkIsClass($conn,$email,$errorcode,$class) {
+	//Executes sql command
+	$num = executeCommand($conn,'SELECT COUNT(*) FROM persons p, users u WHERE p.email =\''.$email.'\' AND p.person_id = u.person_id AND u.class = \''.$class.'\'');
+
+	//If oci_parse doesnt find email within persons
+	if($num[0][0] == 0) {
+		$errorcode[1] =  $errorcode[1].$email.' is either not a patient/doctor please make sure you enter persons with right class. <br/>';
 		$errorcode[0] = false;	
 	}
 	return $errorcode;

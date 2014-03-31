@@ -1,7 +1,7 @@
 <?php session_start();
 	//Checks login has been done and is an administrator
 	if(isset($_SESSION['user_name'])){
-		require('/compsci/webdocs/kjross/web_docs/login/getuserdata.php');
+		require('../login/getuserdata.php');
 		//Obtaining user data
 		$res = getUserData($_SESSION['user_name']);
 		if($res[0][2] == 'a'){
@@ -20,6 +20,7 @@
 				</div>
 			</div>
 				<div id="content-wrap" class="styleform">
+					<h2><a class="button" href="../login/loginform.php">Back</a></h2>
 					<h2>Data Analysis</h2>
 					<h3>Display number of records for each category</h3>
 					<div id="alertbox">
@@ -115,10 +116,10 @@ function addParameterToTable(temp,parameter,i,j,rArray) {
 </script>
 
 </html>
-<?php }else{ echo header('Location:loginform.php');}}
+<?php }else{ echo header('Location:../login/loginform.php');}}
 	//Redirect to login if fails
 	else {
-		header('Location:loginform.php');
+		header('Location:../login/loginform.php');
 	}
 ?>
 
