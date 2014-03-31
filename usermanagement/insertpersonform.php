@@ -1,20 +1,16 @@
 <?php session_start();
-	//Checks login has been done and is an radiologist
+	//Checks login has been done and is an administrator
 	if(isset($_SESSION['user_name'])){
-		require('/compsci/webdocs/kjross/web_docs/login/getuserdata.php');
+		require('../login/getuserdata.php');
 		//Obtaining user data
 		$res = getUserData($_SESSION['user_name']);
-		if($res[0][2] == 'r'){
+		if($res[0][2] == 'a'){
 ?>
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="../stylesheets/generalstylesheet.css">
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
-		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-		<link rel="stylesheet" href="/resources/demos/style.css">
-		
-		<title>Insert Radiology Record</title>
+		<script type="text/javascript" src="../jquery1.1.min.js"></script>
+		<title>Insert Person</title>
 	</head>
 	<body> 
 		<div id="page-wrap">
@@ -24,19 +20,19 @@
 				</div>
 			</div>
 				<div id="content-wrap" class="styleform">
-					<h2>Insert Radiology Record</h2>
+					<h2><a class="button" href="../login/loginform.php">Back</a></h2>
+					<h2>Insert Person</h2>
 					<h3>*required field</h3>
 					<div id="alertbox">
 					</div>
-					<form name="form1" action='usermanagement/php/insertperson.php' method="post" class='ajaxform'>
-						<label for="email">*Email of Doctor:</label><input id="email" name="email" type="text"></br>
-						<label for="email2">*Email of Patient:</label><input id="email2" name="email2" type="text"></br>
-						<label for="testtype">*Test Type:</label><input id="testtype" name="testtype" type="text"></br>
-						<label for="testdate">*Test Date (MM/DD/YYYY):</label><input id="testdate" name="testdate" type="text"></br>
-						<label for="pdate">*Prescribing Date (MM/DD/YYYY):</label><input id="pdate" name="pdate" type="text"></br>
-						<label for="diagnosis">*Diagnosis:&nbsp;&nbsp;&nbsp;</label><textarea id="diagnosis" rows=2 cols=70 name="diagnosis" type="text"></textarea></br>
-						<label for="desc">*Description:</label><textarea id="desc" rows=10 cols=70 name="desc" type="text"></textarea></br>
-						<input type="submit" name="submit" value="Create radiology record">
+					<form name="form1" action='php/insertperson.php' method="post" class='ajaxform'>
+						
+						<label for="firstname">*First Name:</label><input id="firstname" name="firstname" type="text"></br>
+						<label for="lastname">*Last Name:</label><input id="lastname" name="lastname" type="text"></br>
+						<label for="email">*Email:</label><input id="email" name="email" type="text"></br>
+						<label for="password">*Address:</label><input id="address" name="address" type="text"></br>
+						<label for="phone">*Phone:</label><input id="phone" name="phone" type="text"></br>
+						<input type="submit" name="submit" value="Create person">
 					</form>
 				</div>
 			<div id="footer">
@@ -44,7 +40,6 @@
 		</div>	
 	</body>
 	<script>
-
 jQuery(document).ready(function(){
 	jQuery('.ajaxform').submit( function() {
 		$.ajax({
@@ -110,9 +105,9 @@ jQuery(document).ready(function(){
 });
 </script>
 </html>
-<?php }else{ echo header('Location:loginform.php');}}
+<?php }else{ echo header('Location:../login/loginform.php');}}
 	//Redirect to login if fails
 	else {
-		header('Location:loginform.php');
+		header('Location:../login/loginform.php');
 	}
 ?>

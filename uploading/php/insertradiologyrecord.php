@@ -176,12 +176,13 @@ function getUserData($conn,$username){
 	return $num;
 }
 
-//Upload Images based off code from James Hodgson, Tyler Wendlandt, Troy Murphy SQL 
+//Upload Images (Binding code below and SQL) based off code from James Hodgson, Tyler Wendlandt, Troy Murphy
 function uploadImage($conn,$image,$image2,$image3,$record_id,$i){
 	$blob = oci_new_descriptor($conn, OCI_D_LOB);
 	$blob2 = oci_new_descriptor($conn, OCI_D_LOB);
 	$blob3 = oci_new_descriptor($conn, OCI_D_LOB);
 
+	//sql statement to insert image to pacs_images
 	$sql = 'insert into pacs_images (record_id, image_id, thumbnail, regular_size, full_size) values(:recordid, :imageid, empty_blob(), empty_blob(), empty_blob()) returning thumbnail, regular_size, full_size into :thumbnail, :regularsize, :fullsize';
 
 	$result = oci_parse($conn, $sql);
@@ -194,6 +195,7 @@ function uploadImage($conn,$image,$image2,$image3,$record_id,$i){
 	
 	oci_execute($result, OCI_DEFAULT);
 
+	//Checks/Saves images 
 	if($blob->save($image) && $blob2->save($image2) && $blob3->save($image3)) {
 		oci_commit($conn);
 	}
@@ -210,6 +212,8 @@ function resize($filename,$percent,$type,$isSmall) {
 	$original_info = getimagesize($filename);
 	$original_w = $original_info[0];
 	$original_h = $original_info[1];
+
+	//Dependant of type of image executes different function
 	if($type == 'image/jpeg') {
 		$original_img = imagecreatefromjpeg($filename);
 	}
@@ -223,6 +227,7 @@ function resize($filename,$percent,$type,$isSmall) {
 	$thumb_h = $original_h * $percent;
 	$thumb_img = imagecreatetruecolor($thumb_w, $thumb_h);
 	imagecopyresampled($thumb_img, $original_img,0, 0,0, 0,$thumb_w, $thumb_h,$original_w, $original_h);
+	//Dependant of type of image and size produces different function for images and return values
 	if($type == 'image/jpeg') {
 		
 		if($isSmall) {
@@ -256,8 +261,6 @@ function resize($filename,$percent,$type,$isSmall) {
 			return 'temp.png';
 		}
 	}
-	//destroyimage($thumb_img);
-	//destroyimage($original_img);
 }
 
 

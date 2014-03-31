@@ -20,6 +20,7 @@
 				</div>
 			</div>
 				<div id="content-wrap" class="styleform">
+					<h2><a class="button" href="../login/loginform.php">Back</a></h2>
 					<h2>Insert User</h2>
 					<h3>*required field</h3>
 					<div id="alertbox">
