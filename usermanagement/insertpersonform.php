@@ -1,3 +1,11 @@
+<!--
+This form is used by an administrator to insert a person into the database.
+The adminstrator inputs the person firstname, lastname, email, password, and phone.
+If it should pass this infomration to insertperson.php and if successfully pass the 
+person should be added to database
+
+Uses: getuserdata.php, generalstylesheet.css, jquery1.1.min.js, insertperson.php
+//-->
 <?php session_start();
 	//Checks login has been done and is an administrator
 	if(isset($_SESSION['user_name'])){

@@ -1,3 +1,10 @@
+<!--
+This form allows an administrator to add a family doctor to the database.
+A administrator enter a patients and doctors email and add the entry to the
+database if successful.
+
+Uses: getuserdata.php, generalstylesheet.css, jquery1.1.min.js, and insertfamilydoctor.php
+//-->
 <?php session_start();
 	//Checks login has been done and is an administrator
 	if(isset($_SESSION['user_name'])){

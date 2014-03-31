@@ -1,4 +1,11 @@
 <?php
+/*
+Searchs for whether record exists or not with a certain diagnosis. Is used in the 
+reporting module to report the patients with a certain diagnosis.
+
+Uses: processfield.php, checkfieldlength.php, checkfieldempty.php, dbconnect.php
+gettableid.php, executecommand2.php
+*/
 //Inserts general functions
 require('processfield.php');
 require('checkfieldlength.php');

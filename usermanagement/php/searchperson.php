@@ -1,5 +1,12 @@
 <?php
+/*
+This module is used to find whether or not a person exists. If exists
+it returns a persons information. This is used when updating a person in
+updateperson.php.
 
+Uses: processfield.php, checkfieldlength.php, checkfieldempty.php, checkfieldempty.php,
+dbconnect.php, gettableid.php, executecommand.php
+*/
 //Inserts general functions
 require('processfield.php');
 require('checkfieldlength.php');

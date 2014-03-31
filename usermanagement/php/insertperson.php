@@ -1,4 +1,12 @@
 <?php
+/*
+This module inserts a person into the database. It takes in information from
+insertpersonform.php and validates it. If successful then the person is entered
+into the database.
+
+Uses: processfield.php, checkfieldlength.php, checkfieldempty.php, dbconnect.php,
+gettableid.php, executecommand.php
+*/
 //Inserts general functions
 require('processfield.php');
 require('checkfieldlength.php');

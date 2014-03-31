@@ -1,3 +1,9 @@
+<!--
+This form is where a user can login to his/her radiology account. This form takes
+in inputs username and password. It then pass off the password and username to login.php
+and then takes in results of login.php. If sucessfully the page changes and shows the options
+a user has.
+//-->
 <html>
 	<head>
 	<link rel="stylesheet" type="text/css" href="../stylesheets/generalstylesheet.css">
@@ -40,6 +46,7 @@
   					<?php }else {?>
   						<!-- Login Form -->
 						<div class="styleform" id='loginform'>
+							<a class='button' href='../index.php'>Back</a>
 							<h2>Login</h2>
 							<div id="alertbox">
 							</div>

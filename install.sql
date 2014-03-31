@@ -1,4 +1,6 @@
-/*
+/* This install.sql is similar to one provided however provides extra sequences, view, indexes, and content 
+ * for when starting to website for the first time.
+ *
  *  File name:  setup.sql
  *  Function:   to create the initial database schema for the CMPUT 391 project,
  *              Winter Term, 2014
@@ -33,6 +35,9 @@ CREATE TABLE persons (
    UNIQUE (email)
 );
 
+/*
+ * Creates sequences to increment tables
+ */
 CREATE SEQUENCE seq_persons_id START WITH 2 INCREMENT BY 1;
 CREATE SEQUENCE seq_radiologyrecord_id START WITH 1 INCREMENT BY 1;
 
@@ -98,7 +103,10 @@ CREATE TABLE pacs_images (
 INSERT INTO persons VALUES(1,'admin','admin','admin','admin','admin');
 INSERT INTO users VALUES('admin','admin','a',1,sysdate);
 
-/*Builds the inverted Indexs we need. They are set tp update on commit*/
+/*
+* Creates indexes used in search module (CONTAINS function)
+* This SQL is based off Troy Murphy, Tyler Wendlandt, and James Hodgson
+*/
 CREATE INDEX rad_rec_diagnosis on radiology_record(diagnosis)
 INDEXTYPE IS CTXSYS.CONTEXT
 parameters ('sync (on commit)');

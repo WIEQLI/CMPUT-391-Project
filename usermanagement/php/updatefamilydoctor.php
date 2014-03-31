@@ -1,4 +1,12 @@
 <?php
+/*
+This module is used to update a family doctor entry in the database. This function
+takes data from updatefamilydoctorform.php and update the entry accordingly 
+to the database.
+
+Uses: processfield.php, checkfieldlength.php, checkfieldempty.php, dbconnect.php,
+gettableid.php, executecommand.php
+*/
 //Inserts general functions
 require('processfield.php');
 require('checkfieldlength.php');

@@ -1,4 +1,13 @@
 <?php
+/*
+This database function takes in a database connection and a sql statement. It then executes
+the sql statment and returns array(values,condition). Where condition is the result of the sql
+statment whether it executed successfully or not. The values is the multiple rows from the results of the
+sql statment.
+
+Uses: $conn (database connection), $sql (SQL Statement)
+
+*/
 function executeCommand2($conn,$sql) {
 	//Prepares sql using connection and returns statement identifier	
 	$stid = oci_parse($conn,$sql);

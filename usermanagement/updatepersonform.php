@@ -1,3 +1,11 @@
+<!--
+This form is used by an administator to update a person. An adminstrator can enter an email
+of a person they want to update. This will be sent to searchperson.php if search is successful it
+will open a second form with values of the person that you can edit. The administrator can click
+"Update Person" and the person will be updated.
+
+Uses: getuserdata.php, generalstylesheet.css, searchperson.php, updateperson.php, jquery1.1.min.js
+//-->
 <?php session_start();
 	//Checks login has been done and is an administrator
 	if(isset($_SESSION['user_name'])){
@@ -25,7 +33,7 @@
 				<form id='form1' name="form1" action='php/searchperson.php' method="post" class='ajaxform'>
 					<label><u>Find Person</u></label><br/>						
 					<label for="email">Email:</label><input id="email" name="email" type="text"></br>					
-					<input type="submit" name="submit" value="Find User">
+					<input type="submit" name="submit" value="Find Person">
 				</form>
 				<div id="alertbox">
 				</div>
@@ -40,7 +48,7 @@
 					<label for="password2">Address:</label><input id="address2" name="address2" type="text"></br>
 					<label for="phone2">Phone:</label><input id="phone2" name="phone2" type="text"></br>
 					
-					<input type="submit" name="submit" value="Update User">
+					<input type="submit" name="submit" value="Update Person">
 				</form>
 				<div id="alertbox2">
 				</div>

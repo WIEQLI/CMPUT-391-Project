@@ -1,3 +1,6 @@
+<!--
+Main page for radiology website. Is used to access the User Login and User Documentation/
+//-->
 <html>
 	<head>
 	<link rel="stylesheet" type="text/css" href="stylesheets/generalstylesheet.css">

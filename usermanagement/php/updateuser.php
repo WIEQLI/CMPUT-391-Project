@@ -1,4 +1,11 @@
 <?php
+/*
+This module is used to update a user in the database. This
+module takes information from updateuserform.php, validates it,
+and if successful updates the user with information
+
+Uses: dbconnect.php, gettableid.php, executecommand.php
+*/
 //Processes fields text
 $class = $_POST['classes'];
 $username  = $_POST['username3'];

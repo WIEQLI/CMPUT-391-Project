@@ -1,5 +1,12 @@
 <?php
-//Returns next id in table
+/*
+This database function is used to grab the next element in a sequence table. This function
+takes in a database connection ($conn) and a parameter (name of sequence). It returns the next 
+element in the sequence.
+
+Uses: database connection ($conn) and name of sequence ($parameter)
+
+*/
 function getTableId($conn,$parameter){
 	
 	//Prepares sql using connection and returns statement identifier	

@@ -1,4 +1,11 @@
 <?php
+/*
+This module is used to search for whether a family doctor exists or not.
+This is used when updating a family doctor in updatefamilydoctorform.php
+
+Uses: processfield.php, checkfieldlength.php, checkfieldempty.php, dbconnect.php, gettableid.php
+executecommand.php
+*/
 //Inserts general functions
 require('processfield.php');
 require('checkfieldlength.php');

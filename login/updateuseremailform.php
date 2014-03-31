@@ -1,3 +1,10 @@
+<!--
+Form used to update a users email based upon the email she enters in. It passes off this 
+data to updateemail.php.
+
+Uses: jquery1.1.min.js, generalstylesheet.css, and updateemail.php
+
+//-->
 <?php session_start();
 	//Checks login has been done 
 	if(isset($_SESSION['user_name'])){

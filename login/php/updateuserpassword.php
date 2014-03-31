@@ -1,5 +1,11 @@
 <?php
+/*
+This module takes in inputs from updateuserpasswordform.php, validates
+the input, and if succesfully passes updates a users password.
 
+Uses: processfield.php, checkfieldlength.php, checkfieldempty.php, 
+dbconnect.php, and executecommand.php
+*/
 //Inserts general functions
 require('../../usermanagement/php/processfield.php');
 require('../../usermanagement/php/checkfieldlength.php');

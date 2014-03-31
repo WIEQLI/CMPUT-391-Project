@@ -1,3 +1,12 @@
+<!--
+This form is used by an administrator to generate a report based upon a patient
+having a certain diagnosis. This from asks administrator to enter a diagnosis. After,
+an adminstrator can press "Find Reports and this should produce a table of patient based
+upon the search results of the diagnosis
+
+Uses: searchrecords.php, generalstylesheets.css, jquery1.1.min.js
+
+//-->
 <?php session_start();
 	//Checks login has been done and is an administrator
 	if(isset($_SESSION['user_name'])){

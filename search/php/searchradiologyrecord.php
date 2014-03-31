@@ -1,4 +1,12 @@
 <?php
+/*
+This module process data from searchform.php. It creates an sql statement based off
+of the inputs from this form. This sql statment in turn searches for records with the 
+correct results from the sql statement
+
+Uses: dbconnect.php, executecommand.php, executecommand2.php
+*/
+
 //Search sql code based off code from James Hodgson, Tyler Wendlandt, Troy Murphy
 $s_date = $_POST['date'];
 $f_date = $_POST['date2'];

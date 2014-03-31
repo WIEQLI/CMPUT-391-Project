@@ -1,5 +1,12 @@
 <?php
+/*
+This module processes the radiology information from insertradiologyrecordform.php.
+It validates this data and once successfully completed added the data to radiology_record 
+table and adds any images to pacs_images table
 
+Uses: processfield.php, checkfieldlength.php, checkfieldempty.php, dbconnect, executecommand.php, 
+and gettableid.php
+*/
 //Inserts general functions
 require('../../usermanagement/php/processfield.php');
 require('../../usermanagement/php/checkfieldlength.php');

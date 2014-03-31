@@ -1,4 +1,10 @@
 <?php
+/*
+This module searchs for a user used when updating a user. If user
+is found sucessfully it returns to data of the user to be used in updateuser.php
+
+Uses: processfield.php, checkfieldlength.php, checkfieldempty.php, dbconnect.php, gettableid.php, executecommand.php
+*/
 //Inserts general functions
 require('processfield.php');
 require('checkfieldlength.php');

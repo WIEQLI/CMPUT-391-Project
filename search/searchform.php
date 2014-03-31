@@ -1,3 +1,10 @@
+<!--
+This form is just to search for radiology records. This modules allows a username to
+enter keywords and/or dates to search for records in. In then send this data to searchradiologyrecords.php
+and then recieves then results of this module
+
+Uses: jquery.mobile-1.4.2.min.js, jquery-1.9.1.min.js, generalstylesheet.css, and searchradiologyrecord.php
+//-->
 <?php session_start();
 	//Checks login has been done 
 	if(isset($_SESSION['user_name'])){

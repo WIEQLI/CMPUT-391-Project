@@ -1,5 +1,12 @@
 <?php
+/*
+This module is used to update a person in the database. This module
+takes in information from updatepersonform.php, validates it, and if
+successful updates the person with the information.
 
+Uses: processfield.php, checkfieldlength.php, checkfieldempty.php, 
+dbconnect.php, gettableid.php, executecommand.php
+*/
 //Inserts general functions
 require('processfield.php');
 require('checkfieldlength.php');

@@ -1,3 +1,11 @@
+<!--
+This form is used to insert a user into the database. An administrator enters
+a email of a person, username, password, and class for user to be under. This
+information is then sent to insertuser.php where if successfully completes the
+user will be added to the database
+
+Uses: getuserdata.php, generalstylesheet.css, jquery1.1.min.js, insertuser.php
+//-->
 <?php session_start();
 	//Checks login has been done and is an administrator
 	if(isset($_SESSION['user_name'])){

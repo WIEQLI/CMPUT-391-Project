@@ -1,6 +1,15 @@
 <?php
-//Got date extraction code - based off code from James Hodgson, Tyler Wendlandt, Troy Murphy
-// Checks if one of the categories is checked
+/*
+This .php file process data from dataanalysisform.php. Its will produce a SQL statment to run
+based upon the selection of patient it, test type, and time period (weekly, monthly, and yearly).
+It then executes the sql statment and returns the results back to dataanalysisform.php.
+
+Uses: dbconnect.php, executecommand2.php
+
+Collaboration: 
+Got date extraction code - based off code from James Hodgson, Tyler Wendlandt, Troy Murphy
+Checks if one of the categories is checked
+*/
 if(isChecked('testtype') or isChecked('patientid') or isChecked('time')){
 	require('../../database/dbconnect.php');
 	require('../../database/executecommand2.php');

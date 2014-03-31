@@ -1,3 +1,12 @@
+<!--
+This form is used to update a family doctor record. An adminstrator
+enters in the emails of the patient and doctor of the family doctor record they want 
+to update and selects "Search family doctor". If the search is sucessful from searchfamilydoctor.php it will open a 
+second form where the administrator can add the patient email and doctor email they want
+to update the family doctor record to.
+
+Uses: getuserdata.php, generalstylesheet.css, searchfamilydoctor.php, updatefamilydoctor.php
+//-->
 <?php session_start();
 	//Checks login has been done and is an administrator
 	if(isset($_SESSION['user_name'])){

@@ -1,3 +1,11 @@
+<!--
+This form is used by a radiologist to enter a radiology record. A radiologist
+has to enter the proper inputs for a radilogy record along with that a radiologist
+can just images to go along with the record. Its passes off this information off to
+insertradiologyrecord.php where this reocrd is added to the database.
+
+Uses: generalstylesheets.css, jquery-1.9.1.min.js, insertradiologyrecord.php, and getuserdata.php
+//-->
 <?php session_start();
 	//Checks login has been done and is an radiologist
 	if(isset($_SESSION['user_name'])){

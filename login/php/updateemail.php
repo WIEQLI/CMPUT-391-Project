@@ -1,5 +1,9 @@
 <?php
-
+/*
+This module takes in email inputs from updateemailform.php 
+and then validates it, and then if sucessfully passes changes
+the users password in the database.
+*/
 //Inserts general functions
 require('../../usermanagement/php/processfield.php');
 require('../../usermanagement/php/checkfieldlength.php');

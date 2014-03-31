@@ -1,3 +1,11 @@
+<!--
+This form asks an administrator to select patient id, test type, or time period. Based upon selection or combination of patient id, test type, or time period.
+Once the administrator has selected what he/she want they can click "Generate Report". The form will then send the selections to dataanalysis.form and will process
+the data and export a report to this form. The results from dataanalysis.php will then be displayed below "Generate Report".
+
+Uses: dataanalysis.php, jquery1.1.min.js, and generalstylesheets.css
+
+//-->
 <?php session_start();
 	//Checks login has been done and is an administrator
 	if(isset($_SESSION['user_name'])){
@@ -86,7 +94,7 @@ jQuery(document).ready(function(){
 						temp = addParameterToTable(temp,'#patientid',i,j,rArray);
 						temp = addParameterToTable(temp[0],'#testtype',i,temp[1],rArray);
 						temp = addParameterToTable(temp[0],'#time',i,temp[1],rArray);
-						temp = temp[0] + '<td>' + rArray[i][j] + '</td>'+ '</tr>';
+						temp = temp[0] + '<td>' + rArray[i][temp[1]] + '</td>'+ '</tr>';
 					}
 					$('#report').append(temp);
 				}

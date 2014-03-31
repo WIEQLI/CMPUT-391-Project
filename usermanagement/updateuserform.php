@@ -1,3 +1,12 @@
+<!--
+This form allows an administrator to update a user. An administrator enters
+a username of the user they wish to update and click "Find user'. If the user
+is sucessfully found it will open up another form conatining the user information
+and where a administrator can edit this. Once the admin is done update this inforamtion
+they can click "Update user" and the user will be updated
+
+Uses: getuserdata.php generalstylesheet.css, jquery1.1min.js, searchuser.php, updateuser.php
+//-->
 <?php session_start();
 	//Checks login has been done and is an administrator
 	if(isset($_SESSION['user_name'])){

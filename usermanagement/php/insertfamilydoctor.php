@@ -1,5 +1,11 @@
 <?php
+/*
+Takes in information from insertfamilydoctorform.php. It then validates that
+data if sucessfully this module adds the family doctor record to the database.
 
+Uses: processfield.php, checkfieldlength.php, checkfileempty.php, dbconnect.php, and
+executecommand.php
+*/
 //Inserts general functions
 require('processfield.php');
 require('checkfieldlength.php');

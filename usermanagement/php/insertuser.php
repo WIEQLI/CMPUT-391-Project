@@ -1,5 +1,12 @@
 <?php
+/*
+This module inserts a user into the database. This module takes
+inputs from insertuserform.php validates it and if successful 
+inserts a user into the database.
 
+Uses: processfield.php, checkfieldlength.php, checkfieldempty.php,
+dbconnect.php, executecommand.php
+*/
 //Inserts general functions
 require('processfield.php');
 require('checkfieldlength.php');

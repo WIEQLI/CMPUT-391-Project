@@ -1,3 +1,6 @@
+/*
+ Styles used for website
+*/
 * {
   margin: 0;
 }
@@ -144,7 +147,9 @@ box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
 
 }
 
-//http://www.sitepoint.com/style-web-forms-css/
+/*
+  Used styles from here http://www.sitepoint.com/style-web-forms-css/ from forms
+*/
 textarea#feedback {
 width:375px;
 height:150px;

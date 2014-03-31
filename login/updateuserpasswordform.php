@@ -1,3 +1,8 @@
+<!--
+This form allows a user to modify their password. A user simply enters their 
+password, confirms it, and this should be should to updateuserpassword.php 
+where the users password is updated
+//-->
 <?php session_start();
 	//Checks login has been done 
 	if(isset($_SESSION['user_name'])){

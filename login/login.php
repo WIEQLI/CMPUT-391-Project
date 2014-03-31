@@ -1,4 +1,10 @@
 <?php
+/* This module takes in input from a username and password entered from
+   loginform.php. This module process the inputs validated them and if the 
+   username and password is correct returns row of the user for further 
+   processing in loginform.php
+*/
+
 //Inserts general functions
 require('../usermanagement/php/processfield.php');
 require('../usermanagement/php/checkfieldlength.php');
