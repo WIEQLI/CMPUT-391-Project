@@ -23,7 +23,7 @@
 				<h2><a class="button" href="../login/loginform.php">Back</a></h2>
 				<h2>Generate Reports</h2>
 
-				<form id='form1' name="form1" action='../usermanagement/php/searchrecords.php' method="post" class='ajaxform'>
+				<form id='form1' name="form1" action='php/searchrecords.php' method="post" class='ajaxform'>
 					<label><u>Find Report</u></label><br/>						
 					<label for="diagnosis">Diagnosis:</label><input id="diagnosis" name="diagnosis" type="text"></br>					
 					<input type="submit" name="submit" value="Find reports">
