@@ -20,7 +20,10 @@
 				</div>
 			</div>
 			<div id="content-wrap" class="styleform">
+<<<<<<< HEAD
 				<h2><a class="button" href="../login/loginform.php">Back</a></h2>
+=======
+>>>>>>> 619d26f1152f2cc1eb0f1d5eef1ddc3fb97d7b29
 				<h2>Update User</h2>
 				<form id='form1' name="form1" action='php/searchuser.php' method="post" class='ajaxform'>
 					<label><u>Find User</u></label><br/>						
